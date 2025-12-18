@@ -1,0 +1,168 @@
+<!-- 学生管理页面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="title">学生管理</text>
+    <view class="action-buttons">
+      <button class="btn-import" bindtap="importStudents">导入</button>
+      <button class="btn-export" bindtap="exportStudents">导出</button>
+    </view>
+  </view>
+
+  <!-- 学生列表 -->
+  <view class="student-list">
+    <block wx:for="{{studentList}}" wx:key="id">
+      <view class="student-item">
+        <view class="student-info">
+          <image class="avatar" src="{{item.head_image}}" mode="aspectFill"></image>
+          <view class="info-content">
+            <view class="name-row">
+              <text class="name">{{item.name}}</text>
+              <text class="sex">{{item.sex == 1 ? '男' : '女'}}</text>
+            </view>
+            <text class="school">{{item.school}}</text>
+            <text class="subject">科目：{{item.subjects[0].name}}</text>
+          </view>
+        </view>
+        <view class="action-buttons">
+          <button class="btn-detail" bindtap="viewStudentDetail" data-id="{{item.id}}">详情</button>
+          <button class="btn-score" bindtap="viewStudentScores" data-id="{{item.id}}">成绩</button>
+          <button class="btn-attendance" bindtap="viewStudentAttendance" data-id="{{item.id}}">考勤</button>
+          <button class="btn-growth" bindtap="viewStudentGrowth" data-id="{{item.id}}">成长</button>
+          <button class="btn-edit" bindtap="editStudent" data-id="{{item.id}}">编辑</button>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{!loading && studentList.length == 0}}" class="empty">
+    <text>暂无学生数据</text>
+  </view>
+</view>
+
+<!-- 学生详情弹窗 -->
+<view wx:if="{{showDetailModal}}" class="modal">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">学生详情</text>
+      <button class="close-btn" bindtap="closeModal">×</button>
+    </view>
+    <view class="modal-body" wx:if="{{selectedStudent}}">
+      <view class="detail-item">
+        <text class="label">姓名：</text>
+        <text class="value">{{selectedStudent.name}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="label">性别：</text>
+        <text class="value">{{selectedStudent.sex == 1 ? '男' : '女'}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="label">学校：</text>
+        <text class="value">{{selectedStudent.school}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="label">科目：</text>
+        <text class="value">{{selectedStudent.subjects[0].name}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="label">成绩：</text>
+        <text class="value">{{selectedStudent.score}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="label">特点：</text>
+        <text class="value">{{selectedStudent.student_types[0].name}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 成绩弹窗 -->
+<view wx:if="{{showScoreModal}}" class="modal">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">成绩管理 - {{selectedStudent.name}}</text>
+      <button class="close-btn" bindtap="closeModal">×</button>
+    </view>
+    <view class="modal-body">
+      <view class="score-list">
+        <block wx:for="{{studentScores}}" wx:key="id">
+          <view class="score-item">
+            <view class="score-header">
+              <text class="subject">{{item.subject}}</text>
+              <text class="score">{{item.score}}/{{item.full_mark}}</text>
+            </view>
+            <view class="score-info">
+              <text class="exam-type">{{item.exam_type}}</text>
+              <text class="exam-date">{{item.exam_date}}</text>
+              <text class="rank">排名: {{item.rank}}</text>
+              <text class="average">均分: {{item.class_average}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+      <button class="btn-add-score">添加成绩</button>
+    </view>
+  </view>
+</view>
+
+<!-- 考勤弹窗 -->
+<view wx:if="{{showAttendanceModal}}" class="modal">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">考勤管理 - {{selectedStudent.name}}</text>
+      <button class="close-btn" bindtap="closeModal">×</button>
+    </view>
+    <view class="modal-body">
+      <view class="attendance-list">
+        <block wx:for="{{studentAttendance}}" wx:key="id">
+          <view class="attendance-item">
+            <view class="attendance-header">
+              <text class="date">{{item.date}}</text>
+              <text class="status status-{{item.status}}">{{item.status_text}}</text>
+            </view>
+            <view class="attendance-info" wx:if="{{item.reason}}">
+              <text class="reason">原因: {{item.reason}}</text>
+              <text class="approval" wx:if="{{item.teacher_approval}}">已批准</text>
+            </view>
+          </view>
+        </block>
+      </view>
+      <button class="btn-add-attendance">添加考勤</button>
+      <button class="btn-apply-leave">请假申请</button>
+    </view>
+  </view>
+</view>
+
+<!-- 成长档案弹窗 -->
+<view wx:if="{{showGrowthModal}}" class="modal">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">成长档案 - {{selectedStudent.name}}</text>
+      <button class="close-btn" bindtap="closeModal">×</button>
+    </view>
+    <view class="modal-body">
+      <view class="growth-list">
+        <block wx:for="{{studentGrowthRecords}}" wx:key="id">
+          <view class="growth-item">
+            <view class="growth-header">
+              <text class="type">{{item.type_text}}</text>
+              <text class="date">{{item.date}}</text>
+            </view>
+            <view class="growth-content">
+              <text class="title">{{item.title}}</text>
+              <text class="content">{{item.content}}</text>
+              <text class="comment" wx:if="{{item.teacher_comment}}">老师评价: {{item.teacher_comment}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+      <button class="btn-add-growth">添加成长记录</button>
+    </view>
+  </view>
+</view>
