@@ -1,6 +1,7 @@
 
 // index.js
-import { getTeacherDetail, getSchools, getEduBackground, getCourses, getTeacherType, updateTeacher } from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 let app = getApp();
 Page({
 
@@ -57,126 +58,66 @@ Page({
   },
   //学历
   getEduBackgroundList: function () {
-    getEduBackground().then((res) => {
+    const eduBackground = mockData.getEduBackground()
+    this.setData({
+      educational_bg: eduBackground.results
+    });
+    if (this.data.educational_bg.length > 0) {
       this.setData({
-        educational_bg: res.results
+        selecteEduBg: this.data.educational_bg[0].id - 1
       });
-      if (this.data.educational_bg.length > 0) {
-        this.setData({
-          selecteEduBg: this.data.educational_bg[0].id - 1
-        });
-      }
-     
-    })
+    }
   },
-//教育经历
+  //教育经历
   getSchoolsList: function(){
-    getSchools().then((res)=>{
-      this.setData({
-        schools: res.results
-      })
-
-      if (this.data.schools.length > 0) {
-        this.setData({
-          selectSchool: this.data.schools[0].id - 1
-        })
-      }
+    const schools = mockData.getSchools()
+    this.setData({
+      schools: schools.results
     })
+    if (this.data.schools.length > 0) {
+      this.setData({
+        selectSchool: this.data.schools[0].id - 1
+      })
+    }
   },
   getCoursesList: function(){
-    getCourses().then((res) => {
-      //console.log('科目', res.results);
-      this.setData({
-        courses: res.results
-      })
+    const courses = mockData.getCourses()
+    this.setData({
+      courses: courses.results
     })
-    
   },
   getTeacherTypeList: function(){
-    getTeacherType().then((res)=>{
-      this.setData({
-        features: res.results
-      })
+    const teacherType = mockData.getTeacherType()
+    this.setData({
+      features: teacherType.results
     })
-  },
-  
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   },
   getTeaDetail: function (id) {
     var reqData = {
       id: id
     }
-    getTeacherDetail(reqData).then((res) => {
-      // console.log('教师详情', res);
-      for (var i = 0; i < res.confirms.length;i++){
-        this.resetImgs(res.confirms[i]);
-      }
-      var select_subject = [];
-      var select_feature = [];
-      for (var i = 0; i < res.subjects.length;i++){
-        select_subject.push((res.subjects[i].id).toString());
-      }
-      for (var i = 0; i < res.teacher_types.length; i++) {
-        select_feature.push((res.teacher_types[i].id).toString());
-      }
+    const teacherDetail = mockData.getTeacherDetail(reqData)
+    for (var i = 0; i < teacherDetail.confirms.length;i++){
+      this.resetImgs(teacherDetail.confirms[i]);
+    }
+    var select_subject = [];
+    var select_feature = [];
+    for (var i = 0; i < teacherDetail.subjects.length;i++){
+      select_subject.push((teacherDetail.subjects[i].id).toString());
+    }
+    for (var i = 0; i < teacherDetail.teacher_types.length; i++) {
+      select_feature.push((teacherDetail.teacher_types[i].id).toString());
+    }
 
-      this.check_subject(select_subject, this.data.courses);   //课程
-      this.check_tea_feature(select_feature, this.data.features);//教学特点
+    this.check_subject(select_subject, this.data.courses);   //课程
+    this.check_tea_feature(select_feature, this.data.features);//教学特点
 
-      this.setData({
-        infos: res,
-        photoUrl: res.head_image,
-        selectSex: res.sex,
-        selectSchool: res.school.id - 1,
-        selecteEduBg: res.learn - 1,
-        
-      })
+    this.setData({
+      infos: teacherDetail,
+      photoUrl: teacherDetail.head_image,
+      selectSex: teacherDetail.sex,
+      selectSchool: teacherDetail.school.id - 1,
+      selecteEduBg: teacherDetail.learn - 1,
     })
   },
   formSubmit: function (e) {
@@ -234,25 +175,22 @@ Page({
       id: this.data.id
     }
 
-    updateTeacher(reqData,val).then((res)=>{
-      //console.log('修改教师',res);
-      if(res.status == 1){
-        wx.showToast({
-          title: '恭喜，修改成功',
+    const updateResult = mockData.updateTeacher(reqData,val)
+    if(updateResult.status == 1){
+      wx.showToast({
+        title: '恭喜，修改成功',
+      })
+      setTimeout(function(){
+        wx.switchTab({
+          url: '../user/index',
         })
-        setTimeout(function(){
-          wx.switchTab({
-            url: '../user/index',
-          })
-        },2000)
-        
-      }else{
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
-    })
+      },2000)
+    }else{
+      wx.showToast({
+        title: updateResult.msg,
+        icon: 'none'
+      })
+    }
 
   },
   showToast: function(msg){
@@ -452,5 +390,7 @@ Page({
     return uuid;
   },
 })
+
+
 
 

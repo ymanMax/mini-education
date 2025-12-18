@@ -1,31 +1,13 @@
-import { getCity, getSchools } from '../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('./mockData.js')
+
 export const getSchoolsData = () =>{
-//  return new Promise((resolve, reject) => {
-    var data = '';
-    getSchools().then((res) => {
-      
-        console.log('学校', res);
-        data = res;
-        return data;
-      
-      
-      // resolve(res);
-      
-      // return res;
-    })
-  // })
-    
-    // var str = [1,2,3];
-    // return str;
-}
-export const getCityData = () => {
- new Promise((resolve,reject) => {
-    getCity().then((res) => {
-      // console.log('城市', res);
-      resolve(res.data);
-      
-    })
-  })
-  
+    const schools = mockData.getSchools()
+    console.log('学校', schools);
+    return schools;
 }
 
+export const getCityData = () => {
+    const city = mockData.getCity()
+    return city.data;
+}

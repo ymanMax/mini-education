@@ -1,5 +1,6 @@
 // pages/teachers/details.js
-import { getStudentDetail, followerUser, userIsRegister, submitApply } from '../../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../../utils/mockData.js')
 Page({
 
   /**
@@ -111,11 +112,10 @@ Page({
     var reqData = {
       id: id
     }
-    getStudentDetail(reqData).then((res)=>{
-      console.log('学生详情',res);
-      this.setData({
-        infos: res
-      })
+    const studentDetail = mockData.getStudentDetail(reqData)
+    console.log('学生详情',studentDetail);
+    this.setData({
+      infos: studentDetail
     })
   },
   //收藏
@@ -124,54 +124,49 @@ Page({
       target_id: this.data.stu_id,
       target_type: "student"
     }
-    followerUser(reqData).then((res) => {
-      if (res.status == 0 || res.status == 1){
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      } 
-    })
+    const result = mockData.followerUser(reqData)
+    if (result.status == 0 || result.status == 1){
+      wx.showToast({
+        title: result.msg,
+        icon: 'none'
+      })
+    } 
   },
   //发送申请
   sendApply: function () {
-    userIsRegister().then((res) => {
-      //console.log(res);
-      if (res.user_type == 'no') {
-        wx.showModal({
-          title: '尚未注册',
-          content: '注册后可更快找到合适的家教',
-          confirmText: '立即注册',
-          confirmColor: '#FF4D61',
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '../register/register'//实际路径要写全
-              })
-            }
+    const registerInfo = mockData.userIsRegister()
+    if (registerInfo.user_type == 'no') {
+      wx.showModal({
+        title: '尚未注册',
+        content: '注册后可更快找到合适的家教',
+        confirmText: '立即注册',
+        confirmColor: '#FF4D61',
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../register/register'//实际路径要写全
+            })
           }
-
-        })
-      } else {
-        var reqData = {
-          target_id: this.data.stu_id,
-          target_type: 'student'
         }
-        submitApply(reqData).then((res) => {
-          if (res.status == 1){
-            wx.showToast({
-              title: '恭喜，发送成功',
-              icon: 'none'
-            })
-          }else{
-            wx.showToast({
-              title: res.msg,
-              icon:'none'
-            })
-          }
+      })
+    } else {
+      var reqData = {
+        target_id: this.data.stu_id,
+        target_type: 'student'
+      }
+      const applyResult = mockData.submitApply(reqData)
+      if (applyResult.status == 1){
+        wx.showToast({
+          title: '恭喜，发送成功',
+          icon: 'none'
+        })
+      }else{
+        wx.showToast({
+          title: applyResult.msg,
+          icon:'none'
         })
       }
-    })
+    }
 
   }
 

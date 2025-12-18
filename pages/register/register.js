@@ -1,6 +1,7 @@
 
 // index.js
-import { getSchools, getEduBackground, getCourses, getTeacherType, registerTeacher } from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 let app = getApp();
 Page({
 
@@ -65,46 +66,38 @@ Page({
   },
   //学历
   getEduBackgroundList: function () {
-    getEduBackground().then((res) => {
+    const eduBackground = mockData.getEduBackground()
+    this.setData({
+      educational_bg: eduBackground.results
+    });
+    if (this.data.educational_bg.length > 0) {
       this.setData({
-        educational_bg: res.results
+        selecteEduBg: this.data.educational_bg[0].id - 1
       });
-      if (this.data.educational_bg.length > 0) {
-        this.setData({
-          selecteEduBg: this.data.educational_bg[0].id - 1
-        });
-      }
-     
-    })
+    }
   },
-//教育经历
+  //教育经历
   getSchoolsList: function(){
-    getSchools().then((res)=>{
-      this.setData({
-        schools: res.results
-      })
-
-      if (this.data.schools.length > 0) {
-        this.setData({
-          selectSchool: this.data.schools[0].id - 1
-        })
-      }
+    const schools = mockData.getSchools()
+    this.setData({
+      schools: schools.results
     })
+    if (this.data.schools.length > 0) {
+      this.setData({
+        selectSchool: this.data.schools[0].id - 1
+      })
+    }
   },
   getCoursesList: function(){
-    getCourses().then((res) => {
-      //console.log('科目', res.results);
-      this.setData({
-        courses: res.results
-      })
+    const courses = mockData.getCourses()
+    this.setData({
+      courses: courses.results
     })
-    
   },
   getTeacherTypeList: function(){
-    getTeacherType().then((res)=>{
-      this.setData({
-        features: res.results
-      })
+    const teacherType = mockData.getTeacherType()
+    this.setData({
+      features: teacherType.results
     })
   },
   
@@ -213,25 +206,22 @@ Page({
       return;
     }
 
-    registerTeacher(val).then((res)=>{
-      //console.log('注册教师',res);
-      if(res.status == 1){
-        wx.showToast({
-          title: '恭喜，注册成功',
+    const registerResult = mockData.registerTeacher(val)
+    if(registerResult.status == 1){
+      wx.showToast({
+        title: '恭喜，注册成功',
+      })
+      setTimeout(function(){
+        wx.switchTab({
+          url: '../teachers/index',
         })
-        setTimeout(function(){
-          wx.switchTab({
-            url: '../teachers/index',
-          })
-        },2000)
-        
-      }else{
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
-    })
+      },2000)
+    }else{
+      wx.showToast({
+        title: registerResult.msg,
+        icon: 'none'
+      })
+    }
 
   },
   showToast: function(msg){
@@ -423,5 +413,7 @@ Page({
     return uuid;
   },
 })
+
+
 
 

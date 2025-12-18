@@ -1,5 +1,6 @@
 // pages/teachers/index.js
-import { getTeacherList, getCity, getAllCourses, getAllSchools } from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 var app = getApp();
 Page({
   /**
@@ -29,58 +30,45 @@ Page({
     
   },
   getList: function (reqData){
-    getTeacherList(reqData)
-      .then((res) => {
-        //console.log('教师信息',res);
-        this.setData({
-          teacherList: res.results,
-          hasNext: res.has_next,
-          page: res.page,
-          isHideLoadMore: true
-        })
-      })
+    const teacherList = mockData.getTeacherList(reqData)
+    this.setData({
+      teacherList: teacherList.results,
+      hasNext: teacherList.has_next,
+      page: teacherList.page,
+      isHideLoadMore: true
+    })
   },
   getCoursesList: function () {
-    getAllCourses().then((res) => {
-      this.setData({
-        coursesTypes: res
-      })
-      if (this.data.coursesTypes.length > 0){
-        this.setData({
-          courseName: this.data.coursesTypes[0].name,
-          courseId: this.data.coursesTypes[0].id
-        })
-      }
+    const coursesData = mockData.getAllCourses()
+    this.setData({
+      coursesTypes: coursesData
     })
-
+    if (this.data.coursesTypes.length > 0){
+      this.setData({
+        courseName: this.data.coursesTypes[0].name,
+        courseId: this.data.coursesTypes[0].id
+      })
+    }
   },
   //获取城市
   getCityList: function(){
-    getCity()
-      .then((res) => {
-        // console.log('城市', res);
-        this.setData({
-          city: res.results[0].name
-        })
-
-    });
+    const cityData = mockData.getCity()
+    this.setData({
+      city: cityData.results[0].name
+    })
   },
   //获取学校
   getSchoolsList: function(){
-    getAllSchools().then(
-      (res) =>{
-        this.setData({
-          schoolsTypes: res
-        })
-        if (this.data.schoolsTypes.length > 0){
-          this.setData({
-            schoolName: this.data.schoolsTypes[0].name,
-            schoolId: this.data.schoolsTypes[0].id
-          })
-        }
-       
-      }
-    );
+    const schoolsData = mockData.getAllSchools()
+    this.setData({
+      schoolsTypes: schoolsData
+    })
+    if (this.data.schoolsTypes.length > 0){
+      this.setData({
+        schoolName: this.data.schoolsTypes[0].name,
+        schoolId: this.data.schoolsTypes[0].id
+      })
+    }
   },
 
   /**

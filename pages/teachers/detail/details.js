@@ -1,5 +1,6 @@
 // pages/teachers/details.js
-import { getTeacherDetail, followerUser, userIsRegister, submitApply } from '../../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../../utils/mockData.js')
 Page({
   /**
    * 页面的初始数据
@@ -116,77 +117,65 @@ Page({
       url: '../../complain/complain?type='//实际路径要写全
     })
   },
-  getTeaDetail: function (id) {
+  getTeaDetail: function(id){
     var reqData = {
       id: id
     }
-    getTeacherDetail(reqData).then((res) => {
-      console.log('教师详情', res);
-      this.setData({
-        infos: res,
-        customerIsFollower: {
-          customer_is_follower: res.customer_is_follower
-        }
-      })
+    const teacherDetail = mockData.getTeacherDetail(reqData)
+    console.log('教师详情',teacherDetail);
+    this.setData({
+      infos: teacherDetail
     })
   },
   //收藏
   followerUser: function () {
     var reqData = {
-      target_id: this.data.teacher_id,
+      target_id: this.data.tea_id,
       target_type: "teacher"
     }
-    followerUser(reqData).then((res) => {
-      if (res.status == 0 || res.status == 1) {
-        this.setData({
-          customerIsFollower: true
-        })
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
-    })
+    const result = mockData.followerUser(reqData)
+    if (result.status == 0 || result.status == 1){
+      wx.showToast({
+        title: result.msg,
+        icon: 'none'
+      })
+    } 
   },
   //发送申请
   sendApply: function () {
-    userIsRegister().then((res) => {
-      //console.log(res);
-      if (res.user_type == 'no') {
-        wx.showModal({
-          title: '尚未注册',
-          content: '注册后可更快找到合适的家教',
-          confirmText: '立即注册',
-          confirmColor: '#FF4D61',
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '../register/register'//实际路径要写全
-              })
-            }
+    const registerInfo = mockData.userIsRegister()
+    if (registerInfo.user_type == 'no') {
+      wx.showModal({
+        title: '尚未注册',
+        content: '注册后可更快找到合适的家教',
+        confirmText: '立即注册',
+        confirmColor: '#FF4D61',
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../register/register'//实际路径要写全
+            })
           }
-
-        })
-      } else {
-        var reqData = {
-          target_id: this.data.teacher_id,
-          target_type: 'teacher'
         }
-        submitApply(reqData).then((res) => {
-          if (res.status == 1) {
-            wx.showToast({
-              title: '恭喜，发送成功',
-              icon: 'none'
-            })
-          } else {
-            wx.showToast({
-              title: res.msg,
-              icon: 'none'
-            })
-          }
+      })
+    } else {
+      var reqData = {
+        target_id: this.data.tea_id,
+        target_type: 'teacher'
+      }
+      const applyResult = mockData.submitApply(reqData)
+      if (applyResult.status == 1){
+        wx.showToast({
+          title: '恭喜，发送成功',
+          icon: 'none'
+        })
+      }else{
+        wx.showToast({
+          title: applyResult.msg,
+          icon:'none'
         })
       }
-    })
+    }
 
   }
 

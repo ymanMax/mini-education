@@ -1,5 +1,7 @@
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
+
 // pages/teachers/details.js
-import { myPublish, deleteStudent } from '../../api/api.js'
 Page({
 
   /**
@@ -105,47 +107,31 @@ Page({
     })
   },
   getStuDetail: function(){
-    myPublish().then((res) => {
-      console.log(res);
-      this.setData({
-        infos: res,
-        id: res.id
-      })
+    const publishData = mockData.myPublish()
+    console.log(publishData);
+    this.setData({
+      infos: publishData,
+      id: publishData.id
     })
   },
-  delPublic: function () {
-    var _this = this;
-    wx.showModal({
-      title: '确认删除？',
-      content: '删除后将不能寻找教师',
-      confirmText: '确定',
-      confirmColor: '#FF4D61',
-      success: function (r) {
-        if (r.confirm) {
-          _this.del();
-
-        }
-      }
-    })
-  },
+  
   del: function () {
     var reqData = {
       id: this.data.id
     }
 
-    deleteStudent(reqData).then((res) => {
-      if (res.status == 1) {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none'
+    const deleteResult = mockData.deleteStudent(reqData)
+    if (deleteResult.status == 1) {
+      wx.showToast({
+        title: '删除成功',
+        icon: 'none'
+      })
+      setTimeout(function(){
+        wx.switchTab({
+          url: '../user/index'
         })
-        setTimeout(function(){
-          wx.switchTab({
-            url: '../user/index'//实际路径要写全
-          })
-        },2000)
-      }
-    })
+      },2000)
+    }
   }
 
   

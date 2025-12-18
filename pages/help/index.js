@@ -1,4 +1,5 @@
-import { getHelps } from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 Page({
   /**
    * 页面的初始数据
@@ -85,11 +86,10 @@ Page({
     
   },
   getHelpsList: function(){
-    getHelps().then((res)=>{
-      console.log(res);
-      this.setData({
-        helps: res.results
-      })
+    const helps = mockData.getHelps()
+    console.log(helps);
+    this.setData({
+      helps: helps.results
     })
   },
   showAnswer: function(e){

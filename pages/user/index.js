@@ -1,4 +1,5 @@
-import { userIsRegister } from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 const App = getApp()
 
 Page({
@@ -70,58 +71,47 @@ Page({
     },
 
     signOut() {
-    	App.HttpService.signOut()
-    	.then(res => {
-    		const data = res.data
-    		console.log(data)
-    		if (data.meta.code == 0) {
-    			App.WxService.removeStorageSync('token')
-    			App.WxService.redirectTo('/pages/login/index')
-    		}
-    	})
+      const signOutResult = mockData.signOut()
+      console.log(signOutResult)
+      if (signOutResult.meta.code == 0) {
+        App.WxService.removeStorageSync('token')
+        App.WxService.redirectTo('/pages/login/index')
+      }
     },
     isRegister: function(e){
-      userIsRegister().then((res)=>{
-        //console.log(res);
-        if (res.user_type == 'no'){
-          wx.showModal({
-            title: '尚未注册',
-            content: '注册后可更快找到合适的家教',
-            confirmText: '立即注册',
-            confirmColor: '#FF4D61',
-            success: function (res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: '../register/register'//实际路径要写全
-                })
-              } 
-            }
-
+      const registerInfo = mockData.userIsRegister()
+      if (registerInfo.user_type == 'no'){
+        wx.showModal({
+          title: '尚未注册',
+          content: '注册后可更快找到合适的家教',
+          confirmText: '立即注册',
+          confirmColor: '#FF4D61',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '../register/register'//实际路径要写全
+              })
+            } 
+          }
+        })
+      }else{
+        var url = "";
+        var op_type = e.currentTarget.dataset.name;
+        //我的发布
+        if (op_type == 'publish'){
+          if (registerInfo.user_type == 'teacher') {
+            url = "/pages/tea_publish/details";
+          } else if (registerInfo.user_type == 'student') {
+            url = "/pages/stu_publish/details";
+          }
+          wx.navigateTo({
+            url: url
           })
         }else{
-         
-          //console.log('类型', e.currentTarget.dataset.name);
-          var url = "";
-          var op_type = e.currentTarget.dataset.name;
-          //我的发布
-          if (op_type == 'publish'){
-            if (res.user_type == 'teacher') {
-              url = "/pages/tea_publish/details";
-            } else if (res.user_type == 'student') {
-              url = "/pages/stu_publish/details";
-            }
-            wx.navigateTo({
-              url: url
-            })
-          }else{
-            console.log(222);
-            wx.navigateTo({
-              url: e.currentTarget.dataset.path
-            })
-          }
+          wx.navigateTo({
+            url: e.currentTarget.dataset.path
+          })
         }
-      })
-
-      
+      }
     }
 })

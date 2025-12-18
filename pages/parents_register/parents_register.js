@@ -1,5 +1,6 @@
 // pages/login/login.js
-import { getEduBackground, getCourses, getStudentType, getTeacherType, getStuBasis, getBaselevel, registerStudent, getRequire} from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 let app = getApp();
 // 引用百度地图微信小程序JSAPI模块 
 const AREAS = require('../../data/area.js');
@@ -108,76 +109,60 @@ Page({
 
   },
   getTeacherTypeList: function(){
-    getTeacherType().then( 
-      (res)=>{
-        this.setData({
-          features: res.results
-        })
-        
-      }
-    )
+    const teacherType = mockData.getTeacherType()
+    this.setData({
+      features: teacherType.results
+    })
   },
   getStudentTypeList: function(){
-    getStudentType().then((res)=>{
-      this.setData({
-        studentFeatures: res.results
-      })
-
+    const studentType = mockData.getStudentType()
+    this.setData({
+      studentFeatures: studentType.results
     })
   },
   getCoursesList: function () {
-    getCourses().then((res) => {
-      console.log('科目', res.results);
-      this.setData({
-        courses: res.results
-      })
-
-      if (this.data.courses.length > 0){
-        this.setData({
-          selectCourse: this.data.courses[0].id -1
-        })
-      }
+    const courses = mockData.getCourses()
+    console.log('科目', courses.results);
+    this.setData({
+      courses: courses.results
     })
-
+    if (this.data.courses.length > 0){
+      this.setData({
+        selectCourse: this.data.courses[0].id -1
+      })
+    }
   },
   getStuBasisList: function(){
-    getStuBasis().then((res) =>{
-      this.setData({
-        studentsBasis: res.results
-      })
-
-      if (this.data.studentsBasis.length > 0){
-        this.setData({
-          selectBasis: this.data.studentsBasis[0].id - 1
-        })
-      }
+    const stuBasis = mockData.getStuBasis()
+    this.setData({
+      studentsBasis: stuBasis.results
     })
+    if (this.data.studentsBasis.length > 0){
+      this.setData({
+        selectBasis: this.data.studentsBasis[0].id - 1
+      })
+    }
   },
   //获取年级
   getBaselevelList: function() {
-    getBaselevel().then((res) => {
-      this.setData({
-        baseLevels: res.results,
-       
-        cities: res.results[0].level,
-      })
-      console.log('年级数据', this.data.baseLevels);
+    const baselevel = mockData.getBaselevel()
+    this.setData({
+      baseLevels: baselevel.results,
+      cities: baselevel.results[0].level,
     })
+    console.log('年级数据', this.data.baseLevels);
   },
   getRequireList: function(){
-    getRequire().then((res)=>{
-      console.log('教师资质',res);
-      this.setData({
-        requires: res.results
-      })
-
-      if (this.data.requires.length > 0) {
-        this.setData({
-          selectRequire: this.data.requires[0].id - 1
-        })
-      }
-      
+    const require = mockData.getRequire()
+    console.log('教师资质',require);
+    this.setData({
+      requires: require.results
     })
+    if (this.data.requires.length > 0) {
+      this.setData({
+        selectRequire: this.data.requires[0].id - 1
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -440,25 +425,23 @@ Page({
     }
 
     var reqData = e.detail.value;
-    registerStudent(reqData).then((res)=>{
-      if(res.status == 1){
-        wx.showToast({
-          title: '恭喜，注册成功',
-          icon:'none'
+    const registerResult = mockData.registerStudent(reqData)
+    if(registerResult.status == 1){
+      wx.showToast({
+        title: '恭喜，注册成功',
+        icon:'none'
+      })
+      setTimeout(function () {
+        wx.switchTab({
+          url: '../students/index',
         })
-        setTimeout(function () {
-          wx.switchTab({
-            url: '../students/index',
-          })
-        }, 2000)
-
-      }else{
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
-    })
+      }, 2000)
+    }else{
+      wx.showToast({
+        title: registerResult.msg,
+        icon: 'none'
+      })
+    }
   },
   formReset: function () {
     console.log('form发生了reset事件')
@@ -583,4 +566,6 @@ Page({
   
  
 })
+
+
 

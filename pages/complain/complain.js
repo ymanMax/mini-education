@@ -1,5 +1,6 @@
 // pages/complain.js
-import { getReason, submitSuggestion } from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 var app = getApp();
 Page({
   /**
@@ -102,29 +103,25 @@ Page({
       return;
     } 
 
-    submitSuggestion(val).then((res)=>{
-      if(res.status == 1){
-        wx.showToast({
-          title: '投诉成功',
-          icon: 'none'
-        })
+    const result = mockData.submitSuggestion(val)
+    if(result.status == 1){
+      wx.showToast({
+        title: '投诉成功',
+        icon: 'none'
+      })
 
-        setTimeout(function () {
-          wx.switchTab({
-            url: '../user/index',
-          })
-        }, 2000)
-        
-      }else{
-        wx.showToast({
-          title: '投诉失败',
-          icon: 'none'
+      setTimeout(function () {
+        wx.switchTab({
+          url: '../user/index',
         })
-      }
-
+      }, 2000)
       
-      
-    })
+    }else{
+      wx.showToast({
+        title: '投诉失败',
+        icon: 'none'
+      })
+    }
   },
   formReset: function () {
     console.log('form发生了reset事件')
@@ -232,16 +229,10 @@ Page({
     console.log(this.data.selectReason);
   },
   getReasonList: function(){
-    var reqData={
-      'type': this.data.userType
-    }
-    getReason(reqData).then((res)=>{
-      console.log('原因',res);
-      this.setData({
-        complainReasons: res
-      })
+    const reasons = mockData.getReason()
+    this.setData({
+      complainReasons: reasons.results
     })
-  }
+  },
   
 })
-

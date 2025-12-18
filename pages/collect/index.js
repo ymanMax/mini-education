@@ -1,5 +1,6 @@
 // pages/collect/index.js
-import { getFollowerList } from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 Page({
 
   /**
@@ -66,13 +67,11 @@ Page({
   
   },
   getFollowerListData: function(){
-    getFollowerList().then((res)=>{
-      console.log(res);
-      this.setData({
-        followerData: res,
-        length: res.length
-      })
-
+    const followerList = mockData.getFollowerList()
+    console.log(followerList);
+    this.setData({
+      followerData: followerList,
+      length: followerList.length
     })
   }
 })

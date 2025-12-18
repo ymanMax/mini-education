@@ -1,4 +1,5 @@
-import { getStudentList, getCity, getAllCourses, getAllSchools } from '../../api/api.js'
+// 直接使用mock数据，无需API调用
+const mockData = require('../../utils/mockData.js')
 var app = getApp();
 Page({
   /**
@@ -117,82 +118,45 @@ Page({
   },
   //获取城市
   getCityList: function () {
-    getCity()
-      .then((res) => {
-        // console.log('城市', res);
-        this.setData({
-          city: res.results[0].name
-        })
-
-      });
+    const cityData = mockData.getCity()
+    this.setData({
+      city: cityData.results[0].name
+    })
   },
   //获取学校
   getSchoolsList: function () {
-    getAllSchools().then(
-      (res) => {
-        this.setData({
-          schoolsTypes: res
-        })
-        if (this.data.schoolsTypes.length > 0) {
-          this.setData({
-            schoolName: this.data.schoolsTypes[0].name,
-            schoolId: this.data.schoolsTypes[0].id
-          })
-        }
-
-      }
-    );
+    const schoolsData = mockData.getAllSchools()
+    this.setData({
+      schoolsTypes: schoolsData
+    })
+    if (this.data.schoolsTypes.length > 0) {
+      this.setData({
+        schoolName: this.data.schoolsTypes[0].name,
+        schoolId: this.data.schoolsTypes[0].id
+      })
+    }
   },
   getCoursesList: function () {
-   
-    getAllCourses().then((res) => {
-      console.log('课程', res);
+    const coursesData = mockData.getAllCourses()
+    console.log('课程', coursesData);
+    this.setData({
+      coursesTypes: coursesData
+    })
+    if (this.data.coursesTypes.length > 0) {
       this.setData({
-        coursesTypes: res
+        courseName: this.data.coursesTypes[0].name,
+        courseId: this.data.coursesTypes[0].id
       })
-      if (this.data.coursesTypes.length > 0) {
-        this.setData({
-          courseName: this.data.coursesTypes[0].name,
-          courseId: this.data.coursesTypes[0].id
-        })
-      }
-    })
-
-  },
-  selectSchool: function (event) {
-    var school = "";
-    var arr = this.data.schoolsTypes;
-    for (var i = 0; i < arr.length; i++) {
-      if (event.currentTarget.id == arr[i].id) {
-        school = arr[i].name;
-      }
     }
-    this.setData({
-      schoolName: school,
-      schoolId: event.currentTarget.id,
-      showSchoolModal: false
-    })
-
-    this.getStudentListData();   //学生列表 
-  },
-  closeModal: function () {
-    this.setData({
-      showModal: false,
-      showSchoolModal: false
-    })
   },
   //获取学生列表
   getList: function (reqData) {
-    // app.request
-    getStudentList(reqData)
-      .then((res) => {
-      
-        this.setData({
-          stuList: res.results,
-          hasNext: res.has_next,
-          page: res.page
-        })
-      })
+    const studentList = mockData.getStudentList(reqData)
+    this.setData({
+      stuList: studentList.results,
+      hasNext: studentList.has_next,
+      page: studentList.page
+    })
   },
   getStudentListData: function () {
     //console.log('获取学生列表');
