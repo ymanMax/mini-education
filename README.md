@@ -1,1 +1,1 @@
-# mini-education
+# meow-education
