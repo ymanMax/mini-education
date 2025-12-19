@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="page-title">校园卡管理</view>
+
+  <!-- 卡信息 -->
+  <view class="card-info">
+    <view class="card-header">
+      <text class="card-number">卡号: {{campusCard.card_number}}</text>
+      <text class="card-status {{campusCard.status == 'active' ? 'active' : 'disabled'}}">
+        {{campusCard.status == 'active' ? '正常' : '禁用'}}
+      </text>
+    </view>
+    <view class="balance-section">
+      <text class="balance-label">余额</text>
+      <text class="balance-amount">¥{{campusCard.balance}}</text>
+    </view>
+    <view class="recharge-section">
+      <input
+        class="recharge-input"
+        placeholder="充值金额"
+        type="digit"
+        value="{{rechargeAmount}}"
+        bindinput="onRechargeInput">
+      </input>
+      <button class="recharge-btn" bindtap="rechargeCard">充值</button>
+    </view>
+  </view>
+
+  <!-- 消费记录 -->
+  <view class="record-section">
+    <view class="section-title">消费记录</view>
+    <view class="record-list">
+      <block wx:for="{{consumptionRecords}}" wx:key="id">
+        <view class="record-item">
+          <view class="record-info">
+            <text class="record-desc">{{item.description}}</text>
+            <text class="record-amount {{item.amount >= 0 ? 'income' : 'expense'}}">
+              {{item.amount >= 0 ? '+' : ''}}¥{{item.amount}}
+            </text>
+          </view>
+          <view class="record-meta">
+            <text class="record-time">{{item.time}}</text>
+            <text class="record-location">{{item.location}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

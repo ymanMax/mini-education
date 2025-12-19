@@ -1,0 +1,75 @@
+.container {
+  padding: 20rpx;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+  color: #333;
+}
+
+.classroom-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.classroom-item {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.classroom-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.status {
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.status.available {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status.occupied {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.classroom-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.classroom-equipment {
+  color: #888;
+  font-size: 26rpx;
+  margin-bottom: 20rpx;
+}
+
+.reserve-btn {
+  background: #FF4D61;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  padding: 16rpx;
+}

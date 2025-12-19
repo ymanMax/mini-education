@@ -1,0 +1,41 @@
+<view class="container">
+  <view class="page-title">校园公告</view>
+  <view class="tab-bar">
+    <view
+      class="tab-item {{activeTab == 'all' ? 'active' : ''}}"
+      data-type="all"
+      bindtap="switchTab">
+      全部
+    </view>
+    <view
+      class="tab-item {{activeTab == 'notice' ? 'active' : ''}}"
+      data-type="notice"
+      bindtap="switchTab">
+      通知
+    </view>
+    <view
+      class="tab-item {{activeTab == 'news' ? 'active' : ''}}"
+      data-type="news"
+      bindtap="switchTab">
+      新闻
+    </view>
+  </view>
+  <view class="notice-list">
+    <block wx:for="{{notices}}" wx:key="id">
+      <view class="notice-item" bindtap="viewNotice" data-id="{{item.id}}">
+        <view class="notice-header">
+          <text class="notice-title">{{item.title}}</text>
+          <text class="notice-type">{{item.type == 'notice' ? '通知' : '新闻'}}</text>
+        </view>
+        <view class="notice-meta">
+          <text class="author">{{item.author}}</text>
+          <text class="date">{{item.create_time}}</text>
+          <text class="views">{{item.views}}浏览</text>
+        </view>
+        <view class="notice-content">
+          {{item.content}}
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

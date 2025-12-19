@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="page-title">校园活动</view>
+  <view class="activity-list">
+    <block wx:for="{{activities}}" wx:key="id">
+      <view class="activity-item">
+        <view class="activity-header">
+          <text class="activity-title">{{item.title}}</text>
+          <text class="activity-status {{item.status == 'recruiting' ? 'recruiting' : 'closed'}}">
+            {{item.status == 'recruiting' ? '招募中' : '已截止'}}
+          </text>
+        </view>
+        <view class="activity-description">
+          {{item.description}}
+        </view>
+        <view class="activity-info">
+          <view class="info-item">
+            <text class="info-label">时间:</text>
+            <text class="info-value">{{item.start_time}} 至 {{item.end_time}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">地点:</text>
+            <text class="info-value">{{item.location}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">组织方:</text>
+            <text class="info-value">{{item.organizer}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">报名人数:</text>
+            <text class="info-value">{{item.current_participants}}/{{item.max_participants}}</text>
+          </view>
+        </view>
+        <view class="activity-actions">
+          <button
+            class="detail-btn"
+            bindtap="viewActivity"
+            data-id="{{item.id}}">
+            查看详情
+          </button>
+          <button
+            class="register-btn"
+            wx:if="{{item.status == 'recruiting'}}"
+            bindtap="registerActivity"
+            data-id="{{item.id}}">
+            立即报名
+          </button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

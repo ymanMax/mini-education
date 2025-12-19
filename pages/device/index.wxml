@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="page-title">设备预约</view>
+  <view class="device-list">
+    <block wx:for="{{devices}}" wx:key="id">
+      <view class="device-item">
+        <view class="device-header">
+          <text class="device-name">{{item.name}}</text>
+          <text class="status {{item.status == 'available' ? 'available' : 'occupied'}}">
+            {{item.status == 'available' ? '可预约' : '已占用'}}
+          </text>
+        </view>
+        <view class="device-info">
+          <text>类型: {{item.type}}</text>
+          <text>位置: {{item.location}}</text>
+        </view>
+        <view class="device-stock">
+          库存: {{item.available}}/{{item.total}}
+        </view>
+        <button
+          class="reserve-btn"
+          wx:if="{{item.status == 'available'}}"
+          bindtap="reserveDevice"
+          data-id="{{item.id}}">
+          立即预约
+        </button>
+      </view>
+    </block>
+  </view>
+</view>

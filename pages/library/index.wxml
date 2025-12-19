@@ -1,0 +1,64 @@
+<view class="container">
+  <view class="page-title">图书馆管理</view>
+  <view class="tab-bar">
+    <view
+      class="tab-item {{activeTab == 'books' ? 'active' : ''}}"
+      data-tab="books"
+      bindtap="switchTab">
+      图书列表
+    </view>
+    <view
+      class="tab-item {{activeTab == 'borrow' ? 'active' : ''}}"
+      data-tab="borrow"
+      bindtap="switchTab">
+      借阅记录
+    </view>
+  </view>
+
+  <!-- 图书列表 -->
+  <view wx:if="{{activeTab == 'books'}}" class="book-list">
+    <block wx:for="{{books}}" wx:key="id">
+      <view class="book-item">
+        <view class="book-header">
+          <text class="book-title">{{item.title}}</text>
+          <text class="book-status {{item.status == 'available' ? 'available' : 'occupied'}}">
+            {{item.status == 'available' ? '可借阅' : '已借出'}}
+          </text>
+        </view>
+        <view class="book-info">
+          <text>作者: {{item.author}}</text>
+          <text>ISBN: {{item.isbn}}</text>
+          <text>分类: {{item.category}}</text>
+        </view>
+        <view class="book-stock">
+          库存: {{item.available}}/{{item.total}}
+        </view>
+        <button
+          class="borrow-btn"
+          wx:if="{{item.status == 'available'}}"
+          bindtap="borrowBook"
+          data-id="{{item.id}}">
+          立即借阅
+        </button>
+      </view>
+    </block>
+  </view>
+
+  <!-- 借阅记录 -->
+  <view wx:if="{{activeTab == 'borrow'}}" class="record-list">
+    <block wx:for="{{borrowRecords}}" wx:key="id">
+      <view class="record-item">
+        <view class="record-header">
+          <text class="book-title">{{item.book_title}}</text>
+          <text class="record-status {{item.status == 'borrowed' ? 'borrowed' : 'returned'}}">
+            {{item.status == 'borrowed' ? '借阅中' : '已归还'}}
+          </text>
+        </view>
+        <view class="record-info">
+          <text>借阅时间: {{item.borrow_time}}</text>
+          <text wx:if="{{item.return_time}}">归还时间: {{item.return_time}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
