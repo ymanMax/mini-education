@@ -19,8 +19,8 @@
     "pages/help/index",
     "pages/about_us/index",
     "pages/update_teacher/index",
-    "pages/update_student/index"
-    
+    "pages/update_student/index",
+    "pages/score/analysis/analysis"
   ],
   "window": {
     "backgroundTextStyle": "light",

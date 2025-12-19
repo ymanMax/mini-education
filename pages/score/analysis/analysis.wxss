@@ -1,0 +1,367 @@
+/* 成绩分析页面样式 */
+.container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 20rpx;
+}
+
+/* 加载提示样式 */
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.loading-content {
+  background-color: white;
+  padding: 40rpx;
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 32rpx;
+  color: #333;
+}
+
+/* 家长端模式提示 */
+.parent-mode-tip {
+  background-color: #1976D2;
+  color: white;
+  padding: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 学生选择区域样式 */
+.student-selector {
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.selector-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.student-list {
+  white-space: nowrap;
+}
+
+.student-item {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-right: 20rpx;
+  min-width: 150rpx;
+  text-align: center;
+  border: 2rpx solid transparent;
+}
+
+.student-item.active {
+  background-color: #e3f2fd;
+  border-color: #1976D2;
+}
+
+.student-name {
+  display: block;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.student-class {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 成绩概览样式 */
+.score-overview {
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.overview-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.overview-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.overview-item {
+  width: 48%;
+  background-color: #f8f9fa;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.item-label {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.item-value {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1976D2;
+}
+
+/* 学科成绩样式 */
+.subject-scores {
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.subject-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin-bottom: 20rpx;
+}
+
+.tab-item {
+  flex-shrink: 0;
+  background-color: #f0f0f0;
+  border-radius: 20rpx;
+  padding: 15rpx 30rpx;
+  margin-right: 15rpx;
+  font-size: 28rpx;
+  color: #666;
+  white-space: nowrap;
+}
+
+.tab-item.active {
+  background-color: #1976D2;
+  color: white;
+}
+
+.subject-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.subject-item {
+  background-color: #f8f9fa;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+}
+
+.subject-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.subject-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.subject-score {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1976D2;
+}
+
+.subject-progress {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8rpx;
+  background-color: #e0e0e0;
+  border-radius: 4rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius: 4rpx;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #666;
+  min-width: 100rpx;
+  text-align: right;
+}
+
+.subject-rank {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 成绩趋势分析样式 */
+.score-trend-section {
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.trend-content {
+  margin-top: 20rpx;
+}
+
+.trend-list {
+  white-space: nowrap;
+}
+
+.trend-item {
+  display: inline-block;
+  background-color: #f8f9fa;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-right: 20rpx;
+  min-width: 180rpx;
+  text-align: center;
+}
+
+.exam-name {
+  display: block;
+  font-size: 26rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.exam-score {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1976D2;
+  margin-bottom: 10rpx;
+}
+
+.exam-rank {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 成绩对比分析样式 */
+.score-comparison-section {
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.comparison-item {
+  margin-bottom: 30rpx;
+}
+
+.comparison-item:last-child {
+  margin-bottom: 0;
+}
+
+.comparison-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #f8f9fa;
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.ranking-item.current-student {
+  background-color: #e3f2fd;
+  border: 2rpx solid #1976D2;
+}
+
+.ranking-number {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #666;
+  min-width: 80rpx;
+}
+
+.ranking-name {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 20rpx;
+}
+
+.ranking-score {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #1976D2;
+  min-width: 100rpx;
+  text-align: right;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 750rpx) {
+  .overview-item {
+    width: 100%;
+  }
+
+  .subject-tabs {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .trend-list {
+    display: flex;
+    overflow-x: auto;
+  }
+}
