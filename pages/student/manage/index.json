@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "学生管理",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {}
+}
