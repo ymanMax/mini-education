@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "成绩分析",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarBackgroundColor": "#1976D2",
+  "navigationBarTextStyle": "white"
+}

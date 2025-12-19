@@ -366,6 +366,124 @@ const mockApi = {
   // 退出登录
   signOut: () => {
     return { meta: { code: 0 }, msg: '退出成功' };
+  },
+
+  // 获取学生成绩列表
+  getStudentScores: (data = {}) => {
+    const { studentId, classId, gradeId } = data;
+
+    const studentScores = [
+      {
+        id: 1,
+        name: '小明',
+        class: '高一(1)班',
+        grade: '高一',
+        scores: [
+          { subject: '语文', score: 85, fullScore: 150, rank: 12 },
+          { subject: '数学', score: 92, fullScore: 150, rank: 8 },
+          { subject: '英语', score: 78, fullScore: 150, rank: 18 },
+          { subject: '物理', score: 88, fullScore: 100, rank: 6 },
+          { subject: '化学', score: 90, fullScore: 100, rank: 5 },
+          { subject: '生物', score: 82, fullScore: 100, rank: 10 }
+        ],
+        totalScore: 515,
+        averageScore: 85.8,
+        classRank: 15,
+        gradeRank: 128
+      },
+      {
+        id: 2,
+        name: '小红',
+        class: '高一(1)班',
+        grade: '高一',
+        scores: [
+          { subject: '语文', score: 90, fullScore: 150, rank: 8 },
+          { subject: '数学', score: 85, fullScore: 150, rank: 12 },
+          { subject: '英语', score: 92, fullScore: 150, rank: 5 },
+          { subject: '物理', score: 80, fullScore: 100, rank: 12 },
+          { subject: '化学', score: 85, fullScore: 100, rank: 8 },
+          { subject: '生物', score: 88, fullScore: 100, rank: 6 }
+        ],
+        totalScore: 520,
+        averageScore: 86.7,
+        classRank: 12,
+        gradeRank: 115
+      },
+      {
+        id: 3,
+        name: '小刚',
+        class: '高一(2)班',
+        grade: '高一',
+        scores: [
+          { subject: '语文', score: 82, fullScore: 150, rank: 15 },
+          { subject: '数学', score: 95, fullScore: 150, rank: 5 },
+          { subject: '英语', score: 88, fullScore: 150, rank: 10 },
+          { subject: '物理', score: 92, fullScore: 100, rank: 3 },
+          { subject: '化学', score: 88, fullScore: 100, rank: 6 },
+          { subject: '生物', score: 90, fullScore: 100, rank: 4 }
+        ],
+        totalScore: 535,
+        averageScore: 89.2,
+        classRank: 8,
+        gradeRank: 92
+      }
+    ];
+
+    // 如果指定了学生ID，只返回该学生的成绩
+    if (studentId) {
+      const filtered = studentScores.filter(student => student.id == studentId);
+      return createListResponse(filtered);
+    }
+
+    return createListResponse(studentScores);
+  },
+
+  // 获取成绩趋势数据
+  getScoreTrend: (data = {}) => {
+    const { studentId, subject } = data;
+
+    const scoreTrend = [
+      { exam: '第一次月考', totalScore: 480, rank: 156 },
+      { exam: '第二次月考', totalScore: 502, rank: 134 },
+      { exam: '期中考试', totalScore: 515, rank: 128 },
+      { exam: '第三次月考', totalScore: 522, rank: 118 },
+      { exam: '第四次月考', totalScore: 530, rank: 105 },
+      { exam: '期末考试', totalScore: 535, rank: 98 }
+    ];
+
+    return createListResponse(scoreTrend);
+  },
+
+  // 获取班级排名数据
+  getClassRanking: (data = {}) => {
+    const { classId, gradeId } = data;
+
+    const classRanking = [
+      { name: '李华', totalScore: 580, rank: 1 },
+      { name: '王强', totalScore: 565, rank: 2 },
+      { name: '赵敏', totalScore: 552, rank: 3 },
+      { name: '小刚', totalScore: 535, rank: 8 },
+      { name: '小红', totalScore: 520, rank: 12 },
+      { name: '小明', totalScore: 515, rank: 15 }
+    ];
+
+    return createListResponse(classRanking);
+  },
+
+  // 获取年级排名数据
+  getGradeRanking: (data = {}) => {
+    const { gradeId } = data;
+
+    const gradeRanking = [
+      { name: '张伟', totalScore: 685, rank: 1 },
+      { name: '王丽', totalScore: 672, rank: 2 },
+      { name: '李强', totalScore: 665, rank: 3 },
+      { name: '小刚', totalScore: 535, rank: 92 },
+      { name: '小红', totalScore: 520, rank: 115 },
+      { name: '小明', totalScore: 515, rank: 128 }
+    ];
+
+    return createListResponse(gradeRanking);
   }
 };
 
