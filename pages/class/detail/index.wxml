@@ -1,0 +1,68 @@
+<view class="class_header">
+  <view class="class_info">
+    <view class="class_name">{{classDetail.name}}</view>
+    <view class="class_basic">
+      <text>年级：{{classDetail.grade}}</text>
+      <text class="separator">|</text>
+      <text>班主任：{{classDetail.head_teacher}}</text>
+      <text class="separator">|</text>
+      <text>学生数：{{classDetail.student_count}}人</text>
+    </view>
+    <view class="class_date">
+      <text>创建时间：{{classDetail.created_at}}</text>
+      <text class="separator">|</text>
+      <text>更新时间：{{classDetail.updated_at}}</text>
+    </view>
+  </view>
+  <view class="edit_btn" bindtap="showEditModal">
+    <text>编辑</text>
+  </view>
+</view>
+
+<!-- 功能菜单 -->
+<view class="function_menu">
+  <view class="menu_item" bindtap="goToStudentList">
+    <view class="menu_icon">👨‍🎓</view>
+    <view class="menu_text">学生管理</view>
+  </view>
+  <view class="menu_item" bindtap="goToAttendance">
+    <view class="menu_icon">📝</view>
+    <view class="menu_text">考勤记录</view>
+  </view>
+  <view class="menu_item" bindtap="goToAttendanceStat">
+    <view class="menu_icon">📊</view>
+    <view class="menu_text">考勤统计</view>
+  </view>
+  <view class="menu_item" bindtap="goToContacts">
+    <view class="menu_icon">📞</view>
+    <view class="menu_text">班级通讯录</view>
+  </view>
+  <view class="menu_item" bindtap="goToNotice">
+    <view class="menu_icon">📢</view>
+    <view class="menu_text">班级公告</view>
+  </view>
+</view>
+
+<!-- 编辑班级模态框 -->
+<view wx:if="{{showEditModal}}" class="modal_box" bindtap='closeEditModal'></view>
+<view wx:if="{{showEditModal}}" class="edit_modal">
+  <view class="modal_title">编辑班级信息</view>
+  <view class="modal_content">
+    <view class="form_item">
+      <view class="form_label">班级名称</view>
+      <input class="form_input" placeholder="请输入班级名称" value="{{editClassName}}" bindinput="inputClassName" />
+    </view>
+    <view class="form_item">
+      <view class="form_label">年级</view>
+      <input class="form_input" placeholder="请输入年级" value="{{editClassGrade}}" bindinput="inputClassGrade" />
+    </view>
+    <view class="form_item">
+      <view class="form_label">班主任</view>
+      <input class="form_input" placeholder="请输入班主任姓名" value="{{editClassTeacher}}" bindinput="inputClassTeacher" />
+    </view>
+  </view>
+  <view class="modal_footer">
+    <view class="btn_cancel" bindtap="closeEditModal">取消</view>
+    <view class="btn_confirm" bindtap="editClass">保存</view>
+  </view>
+</view>

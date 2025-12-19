@@ -1,0 +1,80 @@
+<!--pages/class/notice/index.wxml-->
+<view class="container">
+  <!-- 头部操作 -->
+  <view class="header_actions">
+    <view class="add_btn" bindtap="showAddModal">
+      <text>发布公告</text>
+    </view>
+  </view>
+
+  <!-- 公告列表 -->
+  <view class="notice_list">
+    <block wx:for="{{noticeList}}" wx:for-item="notice" wx:key="id">
+      <view class="notice_item" data-id="{{notice.id}}" bindtap="viewNoticeDetail">
+        <view class="notice_header">
+          <view class="notice_title">{{notice.title}}</view>
+          <view class="notice_date">{{notice.publish_time}}</view>
+        </view>
+        <view class="notice_content">{{notice.content}}</view>
+        <view class="notice_info">
+          <view class="notice_publisher">发布人：{{notice.publisher}}</view>
+          <view class="notice_actions">
+            <view class="delete_btn" data-id="{{notice.id}}" catchtap="deleteNotice">删除</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty_state" wx:if="{{noticeList.length === 0}}">
+    <view class="empty_icon">📢</view>
+    <view class="empty_text">暂无公告</view>
+    <view class="empty_subtext">点击右上角"发布公告"按钮开始发布第一个公告</view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="loadmore" hidden="{{isHideLoadMore}}">
+    <view class="loading"></view>
+    <view class="loadmore_tips">正在加载</view>
+  </view>
+  <view class="loadmore" hidden="{{!isHideLoadMore && noticeList.length > 0}}">
+    <view class="loadmore_tips loadmore_tips_gray">已全部加载</view>
+  </view>
+
+  <!-- 添加公告模态框 -->
+  <view wx:if="{{showAddModal}}" class="modal_box" bindtap="closeAddModal"></view>
+  <view wx:if="{{showAddModal}}" class="add_modal">
+    <view class="modal_title">发布新公告</view>
+    <view class="modal_content">
+      <view class="form_item">
+        <view class="form_label">公告标题</view>
+        <input class="form_input" placeholder="请输入公告标题" value="{{newNoticeTitle}}" bindinput="inputNoticeTitle" />
+      </view>
+      <view class="form_item">
+        <view class="form_label">公告内容</view>
+        <textarea class="form_textarea" placeholder="请输入公告内容" value="{{newNoticeContent}}" bindinput="inputNoticeContent" auto-height></textarea>
+      </view>
+    </view>
+    <view class="modal_footer">
+      <view class="btn_cancel" bindtap="closeAddModal">取消</view>
+      <view class="btn_confirm" bindtap="createNotice">发布</view>
+    </view>
+  </view>
+
+  <!-- 公告详情模态框 -->
+  <view wx:if="{{showDetailModal && selectedNotice}}" class="modal_box" bindtap="closeDetailModal"></view>
+  <view wx:if="{{showDetailModal && selectedNotice}}" class="detail_modal">
+    <view class="modal_title">{{selectedNotice.title}}</view>
+    <view class="modal_content">
+      <view class="notice_detail_info">
+        <view class="detail_publisher">发布人：{{selectedNotice.publisher}}</view>
+        <view class="detail_time">{{selectedNotice.publish_time}}</view>
+      </view>
+      <view class="notice_detail_content">{{selectedNotice.content}}</view>
+    </view>
+    <view class="modal_footer">
+      <view class="btn_cancel" bindtap="closeDetailModal">关闭</view>
+    </view>
+  </view>
+</view>

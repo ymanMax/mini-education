@@ -1,0 +1,167 @@
+/* pages/class/detail/index.wxss */
+
+.class_header {
+  background: #fff;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.class_info {
+  flex: 1;
+}
+
+.class_name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.class_basic {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.class_basic .separator {
+  margin: 0 15rpx;
+  color: #ccc;
+}
+
+.class_date {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.edit_btn {
+  background: #FF4D61;
+  color: #fff;
+  padding: 15rpx 25rpx;
+  border-radius: 25rpx;
+  font-size: 26rpx;
+  margin-left: 30rpx;
+}
+
+.edit_btn:active {
+  opacity: 0.8;
+}
+
+/* 功能菜单 */
+.function_menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20rpx;
+  background: #f5f5f5;
+  min-height: calc(100vh - 300rpx);
+}
+
+.menu_item {
+  width: 33.33%;
+  padding: 40rpx 20rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.menu_icon {
+  font-size: 60rpx;
+  margin-bottom: 20rpx;
+}
+
+.menu_text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.menu_item:active {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* 编辑班级模态框 */
+.modal_box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.edit_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.modal_title {
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.modal_content {
+  padding: 30rpx;
+}
+
+.form_item {
+  margin-bottom: 30rpx;
+}
+
+.form_label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.form_input {
+  width: 100%;
+  padding: 20rpx;
+  border: 2rpx solid #eee;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.form_input:focus {
+  border-color: #FF4D61;
+}
+
+.modal_footer {
+  display: flex;
+  border-top: 1rpx solid #eee;
+}
+
+.btn_cancel, .btn_confirm {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+}
+
+.btn_cancel {
+  color: #666;
+  border-right: 1rpx solid #eee;
+}
+
+.btn_confirm {
+  color: #FF4D61;
+}
+
+.btn_cancel:active, .btn_confirm:active {
+  background: #f5f5f5;
+}

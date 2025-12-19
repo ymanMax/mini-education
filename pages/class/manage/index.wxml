@@ -1,0 +1,78 @@
+<view class="title clearfix">
+  <view class="list_title">
+    <text>班级列表</text>
+  </view>
+  <!-- 创建班级按钮 -->
+  <view class="create_btn" bindtap="showCreateModal">
+    <text>创建班级</text>
+  </view>
+</view>
+
+<!-- 班级列表 -->
+<view class="list">
+  <block wx:for="{{classList}}" wx:for-index="classIndex" wx:for-item="classItem" wx:key="index">
+    <view class='clearfix class_item'>
+      <view class="class_info">
+        <view class="class_name">{{classItem.name}}</view>
+        <view class="class_detail color_888">
+          <text>年级：{{classItem.grade}}</text>
+          <text class="separator">|</text>
+          <text>班主任：{{classItem.head_teacher}}</text>
+          <text class="separator">|</text>
+          <text>学生数：{{classItem.student_count}}人</text>
+        </view>
+        <view class="class_date color_888">
+          <text>创建于：{{classItem.created_at}}</text>
+        </view>
+      </view>
+      <view class="class_actions">
+        <view class="action_btn detail_btn" data-id="{{classItem.id}}" bindtap="viewClassDetail">
+          <text>详情</text>
+        </view>
+        <view class="action_btn delete_btn" data-id="{{classItem.id}}" bindtap="deleteClass">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 空状态 -->
+<view class="empty_state" wx:if="{{classList.length === 0}}">
+  <view class="empty_icon">📚</view>
+  <view class="empty_text">暂无班级数据</view>
+  <view class="empty_subtext">点击右上角"创建班级"按钮开始创建第一个班级</view>
+</view>
+
+<!-- 上拉加载更多 -->
+<view class="loadmore" hidden="{{isHideLoadMore}}">
+  <view class="loading"></view>
+  <view class="loadmore_tips">正在加载</view>
+</view>
+<view class="loadmore" hidden="{{!isHideLoadMore && classList.length > 0}}">
+  <view class="loadmore_tips loadmore_tips_gray">已全部加载</view>
+</view>
+
+<!-- 创建班级模态框 -->
+<view wx:if="{{showCreateModal}}" class="modal_box" bindtap='closeCreateModal'></view>
+<view wx:if="{{showCreateModal}}" class="create_modal">
+  <view class="modal_title">创建班级</view>
+  <view class="modal_content">
+    <view class="form_item">
+      <view class="form_label">班级名称</view>
+      <input class="form_input" placeholder="请输入班级名称，如：一年级1班" value="{{newClassName}}" bindinput="inputClassName" />
+    </view>
+    <view class="form_item">
+      <view class="form_label">年级</view>
+      <input class="form_input" placeholder="请输入年级，如：一年级" value="{{newClassGrade}}" bindinput="inputClassGrade" />
+    </view>
+    <view class="form_item">
+      <view class="form_label">班主任</view>
+      <input class="form_input" placeholder="请输入班主任姓名" value="{{newClassTeacher}}" bindinput="inputClassTeacher" />
+    </view>
+  </view>
+  <view class="modal_footer">
+    <view class="btn_cancel" bindtap="closeCreateModal">取消</view>
+    <view class="btn_confirm" bindtap="createClass">创建</view>
+  </view>
+</view>

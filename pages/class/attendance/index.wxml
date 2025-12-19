@@ -1,0 +1,78 @@
+<!--pages/class/attendance/index.wxml-->
+<view class="container">
+  <!-- 日期选择器 -->
+  <view class="date_select">
+    <view class="date_label">选择日期</view>
+    <picker mode="date" value="{{currentDate}}" bindchange="selectDate">
+      <view class="date_picker">{{currentDate}}</view>
+    </picker>
+  </view>
+
+  <!-- 考勤列表 -->
+  <view class="attendance_list">
+    <block wx:for="{{attendanceList}}" wx:for-item="record" wx:key="id">
+      <view class="attendance_item">
+        <view class="student_info">
+          <view class="student_name">{{record.student_name}}</view>
+          <view class="student_no">学号：{{record.student_no}}</view>
+        </view>
+        <view class="attendance_status">
+          <view class="status_tag {{record.status == '出勤' ? 'status_present' : record.status == '迟到' ? 'status_late' : record.status == '早退' ? 'status_early' : record.status == '缺勤' ? 'status_absent' : 'status_leave'}}">
+            {{record.status}}
+          </view>
+        </view>
+        <view class="attendance_actions">
+          <view class="action_btn edit_btn" data-id="{{record.id}}" data-studentid="{{record.student_id}}" data-status="{{record.status}}" bindtap="updateAttendance">
+            编辑
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty_state" wx:if="{{attendanceList.length === 0}}">
+    <view class="empty_icon">📝</view>
+    <view class="empty_text">暂无考勤数据</view>
+    <view class="empty_subtext">点击下方按钮开始记录今日考勤</view>
+  </view>
+
+  <!-- 添加考勤按钮 -->
+  <view class="add_attendance_btn" bindtap="showRecordModal">
+    <text>记录考勤</text>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="loadmore" hidden="{{isHideLoadMore}}">
+    <view class="loading"></view>
+    <view class="loadmore_tips">正在加载</view>
+  </view>
+  <view class="loadmore" hidden="{{!isHideLoadMore && attendanceList.length > 0}}">
+    <view class="loadmore_tips loadmore_tips_gray">已全部加载</view>
+  </view>
+
+  <!-- 记录考勤模态框 -->
+  <view wx:if="{{showRecordModal}}" class="modal_box" bindtap="closeRecordModal"></view>
+  <view wx:if="{{showRecordModal}}" class="record_modal">
+    <view class="modal_title">记录考勤</view>
+    <view class="modal_content">
+      <view class="student_name">{{selectedStudentName}}</view>
+      <view class="form_item">
+        <view class="form_label">考勤状态</view>
+        <view class="status_options">
+          <view class="status_option {{selectedStatus == item ? 'selected' : ''}}" wx:for="{{statusOptions}}" wx:key="index" data-status="{{item}}" bindtap="selectStatus">
+            {{item}}
+          </view>
+        </view>
+      </view>
+      <view class="form_item">
+        <view class="form_label">备注</view>
+        <input class="form_input" placeholder="请输入备注信息（可选）" value="{{remark}}" bindinput="inputRemark" />
+      </view>
+    </view>
+    <view class="modal_footer">
+      <view class="btn_cancel" bindtap="closeRecordModal">取消</view>
+      <view class="btn_confirm" bindtap="recordAttendance">确定</view>
+    </view>
+  </view>
+</view>

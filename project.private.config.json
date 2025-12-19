@@ -1,7 +1,19 @@
 {
   "libVersion": "3.12.1",
   "projectname": "%25E5%2596%25B5%25E5%2596%25B5%25E6%2595%2599%25E8%2582%25B2",
-  "condition": {},
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/class/manage/index",
+          "pathName": "pages/class/manage/index",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        }
+      ]
+    }
+  },
   "setting": {
     "urlCheck": false,
     "coverView": false,

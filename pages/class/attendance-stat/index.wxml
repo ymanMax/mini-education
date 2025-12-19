@@ -1,0 +1,78 @@
+<!--pages/class/attendance-stat/index.wxml-->
+<view class="container">
+  <!-- 统计类型选择 -->
+  <view class="stat_type_select">
+    <view class="stat_type_item {{statType == item.value ? 'selected' : ''}}" wx:for="{{statOptions}}" wx:key="value" data-type="{{item.value}}" bindtap="selectStatType">
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 日期选择器 -->
+  <view class="date_section">
+    <view class="date_label">选择统计日期</view>
+    <picker wx:if="{{statType == 'daily'}}" mode="date" value="{{currentDate}}" bindchange="selectDate">
+      <view class="date_picker">{{currentDate}}</view>
+    </picker>
+    <view wx:if="{{statType == 'weekly'}}" class="date_text">{{currentWeek}}周</view>
+    <picker wx:if="{{statType == 'monthly'}}" mode="date" fields="month" value="{{currentDate}}" bindchange="selectDate">
+      <view class="date_picker">{{currentMonth}}</view>
+    </picker>
+  </view>
+
+  <!-- 统计概览 -->
+  <view wx:if="{{attendanceStat}}" class="stat_overview">
+    <view class="overview_item">
+      <view class="overview_value">{{attendanceStat.total_students}}</view>
+      <view class="overview_label">学生总数</view>
+    </view>
+    <view class="overview_item">
+      <view class="overview_value">{{attendanceStat.present_count}}</view>
+      <view class="overview_label">出勤人数</view>
+    </view>
+    <view class="overview_item">
+      <view class="overview_value">{{attendanceStat.absent_count}}</view>
+      <view class="overview_label">缺勤人数</view>
+    </view>
+    <view class="overview_item">
+      <view class="overview_value">{{attendanceStat.attendance_rate}}%</view>
+      <view class="overview_label">出勤率</view>
+    </view>
+  </view>
+
+  <!-- 详细统计 -->
+  <view wx:if="{{attendanceStat}}" class="detail_stat">
+    <view class="stat_title">详细统计</view>
+
+    <view class="stat_item">
+      <view class="stat_item_label">迟到</view>
+      <view class="stat_item_value">{{attendanceStat.late_count}}</view>
+    </view>
+
+    <view class="stat_item">
+      <view class="stat_item_label">早退</view>
+      <view class="stat_item_value">{{attendanceStat.early_count}}</view>
+    </view>
+
+    <view class="stat_item">
+      <view class="stat_item_label">请假</view>
+      <view class="stat_item_value">{{attendanceStat.leave_count}}</view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action_buttons">
+    <view class="action_btn primary_btn" bindtap="exportAttendance">
+      导出数据
+    </view>
+    <view class="action_btn secondary_btn" bindtap="viewDetail">
+      查看详细记录
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{!attendanceStat}}" class="empty_state">
+    <view class="empty_icon">📊</view>
+    <view class="empty_text">暂无统计数据</view>
+    <view class="empty_subtext">请先记录考勤数据后再查看统计</view>
+  </view>
+</view>

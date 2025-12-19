@@ -1,0 +1,163 @@
+/* pages/class/attendance-stat/index.wxss */
+.container {
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.stat_type_select {
+  background: #fff;
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.stat_type_item {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx;
+  font-size: 28rpx;
+  color: #666;
+  border-bottom: 3rpx solid transparent;
+}
+
+.stat_type_item.selected {
+  color: #FF4D61;
+  border-bottom-color: #FF4D61;
+  font-weight: bold;
+}
+
+.date_section {
+  background: #fff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date_label {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.date_picker, .date_text {
+  font-size: 28rpx;
+  color: #409EFF;
+  padding: 10rpx 20rpx;
+  border: 2rpx solid #409EFF;
+  border-radius: 8rpx;
+}
+
+.stat_overview {
+  background: #fff;
+  margin: 0 20rpx 20rpx;
+  padding: 30rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-around;
+}
+
+.overview_item {
+  text-align: center;
+}
+
+.overview_value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FF4D61;
+  margin-bottom: 10rpx;
+}
+
+.overview_label {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.detail_stat {
+  background: #fff;
+  margin: 0 20rpx 20rpx;
+  padding: 30rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.stat_title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.stat_item {
+  display: flex;
+  justify-content: space-between;
+  padding: 25rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.stat_item:last-child {
+  border-bottom: none;
+}
+
+.stat_item_label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.stat_item_value {
+  font-size: 28rpx;
+  color: #FF4D61;
+  font-weight: bold;
+}
+
+.action_buttons {
+  margin: 0 20rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.action_btn {
+  padding: 30rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.primary_btn {
+  background: #FF4D61;
+  color: #fff;
+}
+
+.secondary_btn {
+  background: #e8f4fd;
+  color: #409EFF;
+}
+
+.action_btn:active {
+  opacity: 0.8;
+}
+
+.empty_state {
+  text-align: center;
+  padding: 120rpx 60rpx;
+  color: #888;
+}
+
+.empty_icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty_text {
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+  color: #666;
+}
+
+.empty_subtext {
+  font-size: 26rpx;
+  line-height: 1.6;
+}
