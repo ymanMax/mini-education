@@ -1,0 +1,105 @@
+<!--pages/class/contacts/index.wxml-->
+<view class="container">
+  <!-- 头部操作 -->
+  <view class="header_actions">
+    <view class="add_btn" bindtap="showAddModal">
+      <text>添加联系人</text>
+    </view>
+  </view>
+
+  <!-- 教师列表 -->
+  <view class="contacts_section">
+    <view class="section_header" bindtap="toggleTeacherSection">
+      <view class="section_title">
+        <text>👨‍🏫 教师</text>
+      </view>
+      <view class="section_toggle">{{showTeacherSection ? '▼' : '▶'}}</view>
+    </view>
+
+    <view wx:if="{{showTeacherSection}}" class="contacts_list">
+      <block wx:for="{{contactsList.teachers}}" wx:for-item="teacher" wx:key="id">
+        <view class="contact_item">
+          <view class="contact_info">
+            <view class="contact_name">{{teacher.name}}</view>
+            <view class="contact_role">{{teacher.role}}</view>
+            <view class="contact_phone">{{teacher.phone}}</view>
+          </view>
+          <view class="contact_actions">
+            <view class="action_btn call_btn" data-phone="{{teacher.phone}}" bindtap="makePhoneCall">
+              打电话
+            </view>
+            <view class="action_btn message_btn" data-phone="{{teacher.phone}}" bindtap="sendMessage">
+              发消息
+            </view>
+          </view>
+        </view>
+      </block>
+      <view wx:if="{{contactsList.teachers.length === 0}}" class="empty_subsection">暂无教师数据</view>
+    </view>
+  </view>
+
+  <!-- 家长列表 -->
+  <view class="contacts_section">
+    <view class="section_header" bindtap="toggleParentSection">
+      <view class="section_title">
+        <text>👨‍👩‍👧‍👦 家长</text>
+      </view>
+      <view class="section_toggle">{{showParentSection ? '▼' : '▶'}}</view>
+    </view>
+
+    <view wx:if="{{showParentSection}}" class="contacts_list">
+      <block wx:for="{{contactsList.parents}}" wx:for-item="parent" wx:key="id">
+        <view class="contact_item">
+          <view class="contact_info">
+            <view class="contact_name">{{parent.name}}</view>
+            <view class="contact_relation">学生：{{parent.student_name}} ({{parent.relation}})</view>
+            <view class="contact_phone">{{parent.phone}}</view>
+          </view>
+          <view class="contact_actions">
+            <view class="action_btn call_btn" data-phone="{{parent.phone}}" bindtap="makePhoneCall">
+              打电话
+            </view>
+            <view class="action_btn message_btn" data-phone="{{parent.phone}}" bindtap="sendMessage">
+              发消息
+            </view>
+            <view class="action_btn delete_btn" data-id="{{parent.id}}" bindtap="deleteContact">
+              删除
+            </view>
+          </view>
+        </view>
+      </block>
+      <view wx:if="{{contactsList.parents.length === 0}}" class="empty_subsection">暂无家长数据</view>
+    </view>
+  </view>
+
+  <!-- 添加联系人模态框 -->
+  <view wx:if="{{showAddModal}}" class="modal_box" bindtap="closeAddModal"></view>
+  <view wx:if="{{showAddModal}}" class="add_modal">
+    <view class="modal_title">添加联系人</view>
+    <view class="modal_content">
+      <view class="form_item">
+        <view class="form_label">联系人类别</view>
+        <view class="type_select">
+          <view class="type_option {{newContactType == 'teacher' ? 'selected' : ''}}" data-type="teacher" bindtap="selectContactType">教师</view>
+          <view class="type_option {{newContactType == 'parent' ? 'selected' : ''}}" data-type="parent" bindtap="selectContactType">家长</view>
+        </view>
+      </view>
+      <view class="form_item">
+        <view class="form_label">姓名</view>
+        <input class="form_input" placeholder="请输入姓名" value="{{newContactName}}" bindinput="inputContactName" />
+      </view>
+      <view class="form_item">
+        <view class="form_label">电话</view>
+        <input class="form_input" placeholder="请输入电话号码" value="{{newContactPhone}}" bindinput="inputContactPhone" />
+      </view>
+      <view class="form_item" wx:if="{{newContactType == 'parent'}}">
+        <view class="form_label">与学生关系</view>
+        <input class="form_input" placeholder="例如：父亲/母亲" value="{{newContactRelation}}" bindinput="inputContactRelation" />
+      </view>
+    </view>
+    <view class="modal_footer">
+      <view class="btn_cancel" bindtap="closeAddModal">取消</view>
+      <view class="btn_confirm" bindtap="addContact">添加</view>
+    </view>
+  </view>
+</view>

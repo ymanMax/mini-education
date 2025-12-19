@@ -78,6 +78,41 @@ export const getHelps = () => p('GET', basePath + 'help/');
 //发送申请
 export const submitApply = (data) => p('POST', basePath + 'apply/', data);
 
+// ==================== 班级管理相关API ====================
+
+// 班级管理API
+export const getClassList = (data) => p('GET', basePath + 'class/', data);
+export const getClassDetail = (data) => p('GET', basePath + 'class/' + data.id + '/');
+export const createClass = (data) => p('POST', basePath + 'class/', data);
+export const updateClass = (param, data) => p('PUT', basePath + 'class/' + param.id + '/', data);
+export const deleteClass = (data) => p('DELETE', basePath + 'class/' + data.id + '/');
+
+// 班级学生管理API
+export const getClassStudentList = (data) => p('GET', basePath + 'class/students/', data);
+export const getClassStudentDetail = (data) => p('GET', basePath + 'class/students/' + data.id + '/');
+export const addClassStudent = (data) => p('POST', basePath + 'class/students/', data);
+export const updateClassStudent = (param, data) => p('PUT', basePath + 'class/students/' + param.id + '/', data);
+export const removeClassStudent = (data) => p('DELETE', basePath + 'class/students/' + data.id + '/');
+
+// 考勤管理API
+export const getAttendanceRecord = (data) => p('GET', basePath + 'attendance/', data);
+export const recordAttendance = (data) => p('POST', basePath + 'attendance/', data);
+export const updateAttendance = (param, data) => p('PUT', basePath + 'attendance/' + param.id + '/', data);
+
+// 公告管理API
+export const getNoticeList = (data) => p('GET', basePath + 'notice/', data);
+export const getNoticeDetail = (data) => p('GET', basePath + 'notice/' + data.id + '/');
+export const createNotice = (data) => p('POST', basePath + 'notice/', data);
+export const updateNotice = (param, data) => p('PUT', basePath + 'notice/' + param.id + '/', data);
+export const deleteNotice = (data) => p('DELETE', basePath + 'notice/' + data.id + '/');
+
+// 通讯录API
+export const getClassContacts = (data) => p('GET', basePath + 'class/contacts/', data);
+
+// 统计API
+export const getAttendanceStat = (data) => p('GET', basePath + 'attendance/stat/', data);
+export const exportAttendanceData = (data) => p('GET', basePath + 'attendance/export/', data);
+
 
 
 

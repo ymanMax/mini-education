@@ -1,0 +1,94 @@
+<view class="title clearfix">
+  <view class="list_title">
+    <text>学生列表</text>
+  </view>
+  <!-- 添加学生按钮 -->
+  <view class="add_btn" bindtap="showAddModal">
+    <text>添加学生</text>
+  </view>
+</view>
+
+<!-- 学生列表 -->
+<view class="list">
+  <block wx:for="{{studentList}}" wx:for-index="studentIndex" wx:for-item="student" wx:key="index">
+    <view class='clearfix student_item'>
+      <view class="student_info">
+        <view class="student_name">{{student.name}}</view>
+        <view class="student_detail color_888">
+          <text>性别：{{student.sex == 0 ? '男' : '女'}}</text>
+          <text class="separator">|</text>
+          <text>年龄：{{student.age}}岁</text>
+        </view>
+        <view class="parent_info color_888">
+          <text>家长：{{student.parent_name}}</text>
+          <text class="separator">|</text>
+          <text>电话：{{student.parent_phone}}</text>
+        </view>
+        <view class="student_status">
+          <view class="status_tag {{student.status == '正常' ? 'status_normal' : 'status_leave'}}">
+            {{student.status}}
+          </view>
+        </view>
+      </view>
+      <view class="student_actions">
+        <view class="action_btn detail_btn" data-id="{{student.id}}" bindtap="viewStudentDetail">
+          <text>详情</text>
+        </view>
+        <view class="action_btn delete_btn" data-id="{{student.id}}" bindtap="deleteStudent">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 空状态 -->
+<view class="empty_state" wx:if="{{studentList.length === 0}}">
+  <view class="empty_icon">👨‍🎓</view>
+  <view class="empty_text">暂无学生数据</view>
+  <view class="empty_subtext">点击右上角"添加学生"按钮开始添加第一个学生</view>
+</view>
+
+<!-- 上拉加载更多 -->
+<view class="loadmore" hidden="{{isHideLoadMore}}">
+  <view class="loading"></view>
+  <view class="loadmore_tips">正在加载</view>
+</view>
+<view class="loadmore" hidden="{{!isHideLoadMore && studentList.length > 0}}">
+  <view class="loadmore_tips loadmore_tips_gray">已全部加载</view>
+</view>
+
+<!-- 添加学生模态框 -->
+<view wx:if="{{showAddModal}}" class="modal_box" bindtap='closeAddModal'></view>
+<view wx:if="{{showAddModal}}" class="add_modal">
+  <view class="modal_title">添加学生</view>
+  <view class="modal_content">
+    <view class="form_item">
+      <view class="form_label">学生姓名</view>
+      <input class="form_input" placeholder="请输入学生姓名" value="{{newStudentName}}" bindinput="inputStudentName" />
+    </view>
+    <view class="form_item">
+      <view class="form_label">性别</view>
+      <view class="sex_select">
+        <view class="sex_option {{newStudentSex == 0 ? 'selected' : ''}}" data-sex="0" bindtap="selectStudentSex">男</view>
+        <view class="sex_option {{newStudentSex == 1 ? 'selected' : ''}}" data-sex="1" bindtap="selectStudentSex">女</view>
+      </view>
+    </view>
+    <view class="form_item">
+      <view class="form_label">年龄</view>
+      <input class="form_input" placeholder="请输入学生年龄" type="number" value="{{newStudentAge}}" bindinput="inputStudentAge" />
+    </view>
+    <view class="form_item">
+      <view class="form_label">家长姓名</view>
+      <input class="form_input" placeholder="请输入家长姓名" value="{{newParentName}}" bindinput="inputParentName" />
+    </view>
+    <view class="form_item">
+      <view class="form_label">家长电话</view>
+      <input class="form_input" placeholder="请输入家长电话" value="{{newParentPhone}}" bindinput="inputParentPhone" />
+    </view>
+  </view>
+  <view class="modal_footer">
+    <view class="btn_cancel" bindtap="closeAddModal">取消</view>
+    <view class="btn_confirm" bindtap="addStudent">添加</view>
+  </view>
+</view>

@@ -11,20 +11,26 @@ Page({
 				text: '我的收藏',
 				path: '/pages/collect/index',
         name:'collect'
-			}, 
+			},
 			{
         icon: '../../images/apply.png',
 				text: '我的发布',
         path: '/pages/tea_publish/details',
         name: 'publish'
-			}, 
+			},
 			{
         icon: '../../images/apply.png',
 				text: '我的申请',
         path: '/pages/apply/index',
         name: 'apply'
+			},
+			{
+        icon: '../../images/apply.png',
+				text: '班级管理',
+        path: '/pages/class/manage/index',
+        name: 'class_manage'
 			}
-		
+
 		],
 		settings: [
       {
@@ -107,7 +113,12 @@ Page({
           wx.navigateTo({
             url: url
           })
-        }else{
+        } else if (op_type == 'class_manage') {
+          // 班级管理直接跳转，无需注册
+          wx.navigateTo({
+            url: e.currentTarget.dataset.path
+          })
+        } else {
           wx.navigateTo({
             url: e.currentTarget.dataset.path
           })

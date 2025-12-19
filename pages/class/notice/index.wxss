@@ -1,0 +1,262 @@
+/* pages/class/notice/index.wxss */
+.container {
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.header_actions {
+  padding: 20rpx 30rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  text-align: right;
+}
+
+.add_btn {
+  background: #FF4D61;
+  color: #fff;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  display: inline-block;
+}
+
+.add_btn:active {
+  opacity: 0.8;
+}
+
+.notice_list {
+  background: #f5f5f5;
+}
+
+.notice_item {
+  background: #fff;
+  margin: 0 20rpx 20rpx;
+  padding: 30rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.notice_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.notice_title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  margin-right: 20rpx;
+  line-height: 1.4;
+}
+
+.notice_date {
+  font-size: 22rpx;
+  color: #888;
+  white-space: nowrap;
+}
+
+.notice_content {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+}
+
+.notice_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.notice_publisher {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.notice_actions {
+  display: flex;
+}
+
+.delete_btn {
+  color: #FF4D4F;
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 6rpx;
+  background: #fff1f0;
+}
+
+.delete_btn:active {
+  opacity: 0.8;
+}
+
+.empty_state {
+  text-align: center;
+  padding: 120rpx 60rpx;
+  color: #888;
+}
+
+.empty_icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty_text {
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+  color: #666;
+}
+
+.empty_subtext {
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.loadmore {
+  text-align: center;
+  padding: 40rpx 0;
+  color: #888;
+  font-size: 26rpx;
+}
+
+.loading {
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  border: 2rpx solid #ccc;
+  border-top-color: #FF4D61;
+  border-radius: 50%;
+  animation: loading 1s linear infinite;
+  margin-right: 15rpx;
+  vertical-align: middle;
+}
+
+@keyframes loading {
+  to { transform: rotate(360deg); }
+}
+
+.loadmore_tips_gray {
+  color: #ccc;
+}
+
+/* 模态框样式 */
+.modal_box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.add_modal, .detail_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  z-index: 1001;
+  overflow: hidden;
+  max-height: 80vh;
+}
+
+.modal_title {
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.modal_content {
+  padding: 30rpx;
+  max-height: calc(80vh - 200rpx);
+  overflow-y: auto;
+}
+
+.form_item {
+  margin-bottom: 30rpx;
+}
+
+.form_label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.form_input {
+  width: 100%;
+  padding: 20rpx;
+  border: 2rpx solid #eee;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.form_textarea {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 20rpx;
+  border: 2rpx solid #eee;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.form_input:focus, .form_textarea:focus {
+  border-color: #FF4D61;
+}
+
+.notice_detail_info {
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.detail_publisher, .detail_time {
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 10rpx;
+}
+
+.notice_detail_content {
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: #333;
+}
+
+.modal_footer {
+  display: flex;
+  border-top: 1rpx solid #eee;
+}
+
+.btn_cancel, .btn_confirm {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+}
+
+.btn_cancel {
+  color: #666;
+  border-right: 1rpx solid #eee;
+}
+
+.btn_confirm {
+  color: #FF4D61;
+}
+
+.btn_cancel:active, .btn_confirm:active {
+  background: #f5f5f5;
+}
