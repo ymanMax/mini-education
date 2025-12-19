@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="notice-title">{{notice.title}}</view>
+  <view class="notice-meta">
+    <text class="author">{{notice.author}}</text>
+    <text class="date">{{notice.create_time}}</text>
+    <text class="views">{{notice.views}}浏览</text>
+  </view>
+  <view class="notice-content">{{notice.content}}</view>
+</view>

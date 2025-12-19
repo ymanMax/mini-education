@@ -1,0 +1,28 @@
+.container {
+  padding: 30rpx;
+}
+
+.notice-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.notice-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 24rpx;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.notice-content {
+  color: #666;
+  font-size: 28rpx;
+  line-height: 1.8;
+  white-space: pre-line;
+}

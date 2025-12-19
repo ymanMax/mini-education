@@ -19,8 +19,17 @@
     "pages/help/index",
     "pages/about_us/index",
     "pages/update_teacher/index",
-    "pages/update_student/index"
-    
+    "pages/update_student/index",
+    "pages/classroom/index",
+    "pages/device/index",
+    "pages/notice/index",
+    "pages/notice/detail",
+    "pages/library/index",
+    "pages/library/borrow",
+    "pages/campuscard/index",
+    "pages/activity/index",
+    "pages/activity/detail"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -38,6 +47,12 @@
     "backgroundColor": "#FAFAFA",
     "list": [
       {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/mmhtab_icon_mmh_n@2x.png",
+        "selectedIconPath": "images/tabbar/mmhtab_icon_mmh_s@2x.png",
+        "text": "首页"
+      },
+      {
         "pagePath": "pages/teachers/index",
         "iconPath": "images/tabbar/mmhtab_icon_mmh_n@2x.png",
         "selectedIconPath": "images/tabbar/mmhtab_icon_mmh_s@2x.png",
@@ -50,10 +65,10 @@
         "text": "找学生"
       },
       {
-        "pagePath": "pages/match/index",
+        "pagePath": "pages/notice/index",
         "iconPath": "images/tabbar/mmhtab_icon_gwc_n@2x.png",
         "selectedIconPath": "images/tabbar/mmhtab_icon_gwc_s@2x.png",
-        "text": "智能匹配"
+        "text": "校园服务"
       },
       {
         "pagePath": "pages/user/index",

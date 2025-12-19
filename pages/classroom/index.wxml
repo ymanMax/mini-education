@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="page-title">教室预约</view>
+  <view class="classroom-list">
+    <block wx:for="{{classrooms}}" wx:key="id">
+      <view class="classroom-item">
+        <view class="classroom-header">
+          <text class="classroom-name">{{item.name}}</text>
+          <text class="status {{item.status == 'available' ? 'available' : 'occupied'}}">
+            {{item.status == 'available' ? '可预约' : '已占用'}}
+          </text>
+        </view>
+        <view class="classroom-info">
+          <text>容量: {{item.capacity}}人</text>
+          <text>位置: {{item.location}}</text>
+        </view>
+        <view class="classroom-equipment">
+          设备: {{item.equipment}}
+        </view>
+        <button
+          class="reserve-btn"
+          wx:if="{{item.status == 'available'}}"
+          bindtap="reserveClassroom"
+          data-id="{{item.id}}">
+          立即预约
+        </button>
+      </view>
+    </block>
+  </view>
+</view>

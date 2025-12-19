@@ -1,24 +1,31 @@
-<!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称          </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <swiper class="slide-image" indicator-dots="{{indicatorDots}}"
-    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">
-    <block wx:for="{{imgUrls}}">
-      <swiper-item>
-        <image src="{{item}}" class="slide-image" width="355" height="150"/>
-      </swiper-item>
-    </block>
-  </swiper>
- 
-  <slider bindchange="intervalChange" show-value min="500" max="2000"/> interval
-  <slider bindchange="durationChange" show-value min="1000" max="10000"/> duration
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="page-title">校园信息化管理系统</view>
+
+  <!-- 服务菜单 -->
+  <view class="service-menu">
+    <view class="menu-item" bindtap="goToClassroom">
+      <view class="menu-icon">📚</view>
+      <view class="menu-name">教室预约</view>
+    </view>
+    <view class="menu-item" bindtap="goToDevice">
+      <view class="menu-icon">💻</view>
+      <view class="menu-name">设备预约</view>
+    </view>
+    <view class="menu-item" bindtap="goToNotice">
+      <view class="menu-icon">📢</view>
+      <view class="menu-name">校园公告</view>
+    </view>
+    <view class="menu-item" bindtap="goToLibrary">
+      <view class="menu-icon">🏫</view>
+      <view class="menu-name">图书馆</view>
+    </view>
+    <view class="menu-item" bindtap="goToCampusCard">
+      <view class="menu-icon">💳</view>
+      <view class="menu-name">校园卡</view>
+    </view>
+    <view class="menu-item" bindtap="goToActivity">
+      <view class="menu-icon">🎉</view>
+      <view class="menu-name">校园活动</view>
+    </view>
   </view>
 </view>

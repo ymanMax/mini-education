@@ -1,0 +1,107 @@
+.container {
+  padding: 20rpx;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+  color: #333;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.activity-item {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.activity-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.activity-status {
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.activity-status.recruiting {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.activity-status.closed {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.activity-description {
+  color: #666;
+  font-size: 28rpx;
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+}
+
+.activity-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  color: #888;
+  font-size: 26rpx;
+}
+
+.info-label {
+  width: 120rpx;
+  color: #666;
+}
+
+.info-value {
+  flex: 1;
+}
+
+.activity-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.detail-btn, .register-btn {
+  flex: 1;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  padding: 16rpx;
+}
+
+.detail-btn {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.register-btn {
+  background: #FF4D61;
+  color: #fff;
+}
