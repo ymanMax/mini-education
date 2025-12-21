@@ -1,0 +1,52 @@
+<!--pages/admin/resource_utilization/index.wxml-->
+<view class="resource-utilization-container">
+  <view class="page-header">
+    <text class="title">教育资源利用率</text>
+    <text class="subtitle">全面分析资源使用情况</text>
+  </view>
+
+  <!-- 资源使用概况 -->
+  <view class="section">
+    <view class="section-title">资源使用概况</view>
+    <view class="resource-overview">
+      <view class="overview-item" wx:for="{{resourceOverview}}" wx:key="resource">
+        <view class="resource-name">{{item.resource}}</view>
+        <view class="utilization-info">
+          <view class="utilization-bar">
+            <view class="utilization-fill" style="width: {{item.utilization}}%"></view>
+          </view>
+          <view class="utilization-text">{{item.utilization}}%</view>
+        </view>
+        <view class="utilization-trend" style="color: {{item.trend > 0 ? '#00C896' : '#FF4D61'}}">
+          {{item.trend > 0 ? '+' : ''}}{{item.trend}}%
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 资源分类详情 -->
+  <view class="section">
+    <view class="section-title">资源分类详情</view>
+    <view class="resource-details">
+      <view class="detail-category" wx:for="{{resourceCategories}}" wx:key="category">
+        <view class="category-name">{{item.category}}</view>
+        <view class="category-stats">
+          <text class="total">总数: {{item.total}}</text>
+          <text class="used">已使用: {{item.used}}</text>
+          <text class="utilization">利用率: {{item.utilization}}%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 使用趋势 -->
+  <view class="section">
+    <view class="section-title">使用趋势分析</view>
+    <view class="usage-trend">
+      <view class="trend-item" wx:for="{{usageTrend}}" wx:key="month">
+        <view class="month">{{item.month}}</view>
+        <view class="avg-utilization">{{item.average}}%</view>
+      </view>
+    </view>
+  </view>
+</view>
