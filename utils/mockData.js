@@ -363,6 +363,80 @@ const mockApi = {
     return createSuccessResponse({}, '申请发送成功');
   },
   
+  // 数据看板核心数据
+  getDashboardData: () => {
+    return createSuccessResponse({
+      keyMetrics: [
+        { id: 1, label: '注册教师数', value: '1,258', trend: 12.5 },
+        { id: 2, label: '注册学生数', value: '3,421', trend: 18.3 },
+        { id: 3, label: '成功匹配数', value: '2,847', trend: 22.1 },
+        { id: 4, label: '教学满意度', value: '96.8%', trend: 3.2 },
+        { id: 5, label: '本月新增', value: '523', trend: 25.7 },
+        { id: 6, label: '资源利用率', value: '87.5%', trend: -1.2 }
+      ]
+    });
+  },
+
+  // 教学质量分析数据
+  getQualityAnalysis: () => {
+    return createSuccessResponse({
+      qualityData: [
+        { course: '语文', score: 92, trend: 2.5 },
+        { course: '数学', score: 88, trend: 1.8 },
+        { course: '英语', score: 95, trend: 3.2 },
+        { course: '物理', score: 85, trend: -0.5 },
+        { course: '化学', score: 89, trend: 2.1 },
+        { course: '生物', score: 91, trend: 1.9 }
+      ]
+    });
+  },
+
+  // 生源分析数据
+  getStudentSourceAnalysis: () => {
+    return createSuccessResponse({
+      sourceData: [
+        { region: '北京市', count: 856, percentage: 25.0 },
+        { region: '上海市', count: 723, percentage: 21.1 },
+        { region: '广州市', count: 612, percentage: 17.9 },
+        { region: '深圳市', count: 543, percentage: 15.9 },
+        { region: '杭州市', count: 487, percentage: 14.2 },
+        { region: '其他', count: 200, percentage: 5.9 }
+      ]
+    });
+  },
+
+  // 资源利用率数据
+  getResourceUtilization: () => {
+    return createSuccessResponse({
+      resourceData: [
+        { resource: '教师资源', utilization: 87, trend: 1.2 },
+        { resource: '课程资源', utilization: 92, trend: 2.5 },
+        { resource: '设备资源', utilization: 78, trend: -0.8 },
+        { resource: '场地资源', utilization: 85, trend: 1.5 },
+        { resource: '网络资源', utilization: 95, trend: 3.0 }
+      ]
+    });
+  },
+
+  // 招生预测数据
+  getEnrollmentPrediction: () => {
+    return createSuccessResponse({
+      predictionData: [
+        { month: '1月', actual: 450, predicted: 480 },
+        { month: '2月', actual: 420, predicted: 460 },
+        { month: '3月', actual: 510, predicted: 520 },
+        { month: '4月', actual: 580, predicted: 600 },
+        { month: '5月', actual: 620, predicted: 650 },
+        { month: '6月', actual: null, predicted: 700 }
+      ]
+    });
+  },
+
+  // 导出数据
+  exportReport: (data) => {
+    return createSuccessResponse({}, `数据已成功导出为${data.format}格式`);
+  },
+
   // 退出登录
   signOut: () => {
     return { meta: { code: 0 }, msg: '退出成功' };

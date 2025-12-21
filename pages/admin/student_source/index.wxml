@@ -1,0 +1,46 @@
+<!--pages/admin/student_source/index.wxml-->
+<view class="student-source-container">
+  <view class="page-header">
+    <text class="title">生源分析</text>
+    <text class="subtitle">学生来源分布与招生预测</text>
+  </view>
+
+  <!-- 地域分布 -->
+  <view class="section">
+    <view class="section-title">地域分布</view>
+    <view class="region-distribution">
+      <view class="region-item" wx:for="{{regionData}}" wx:key="region">
+        <view class="region-info">
+          <text class="region-name">{{item.region}}</text>
+          <text class="region-percentage">{{item.percentage}}%</text>
+        </view>
+        <view class="student-count">{{item.count}}人</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学校分布 -->
+  <view class="section">
+    <view class="section-title">学校分布</view>
+    <view class="school-distribution">
+      <view class="school-item" wx:for="{{schoolData}}" wx:key="school">
+        <view class="school-name">{{item.school}}</view>
+        <view class="school-count">{{item.count}}人</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 招生预测 -->
+  <view class="section">
+    <view class="section-title">招生预测</view>
+    <view class="prediction-section">
+      <view class="prediction-item" wx:for="{{predictionData}}" wx:key="month">
+        <view class="month">{{item.month}}</view>
+        <view class="prediction-values">
+          <text class="actual" wx:if="{{item.actual}}">实际: {{item.actual}}</text>
+          <text class="predicted">预测: {{item.predicted}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

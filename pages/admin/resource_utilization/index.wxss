@@ -1,0 +1,162 @@
+/* pages/admin/resource_utilization/index.wxss */
+.resource-utilization-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20rpx;
+}
+
+.page-header {
+  text-align: center;
+  padding: 40rpx 0;
+  background: linear-gradient(135deg, #FF4D61 0%, #FF6B81 100%);
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  color: white;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.section {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+/* 资源概况 */
+.resource-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.overview-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx;
+  background-color: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.resource-name {
+  width: 150rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.utilization-info {
+  flex: 1;
+  margin: 0 20rpx;
+}
+
+.utilization-bar {
+  height: 12rpx;
+  background-color: #f0f0f0;
+  border-radius: 6rpx;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+}
+
+.utilization-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FFA500 0%, #FFC107 100%);
+  border-radius: 6rpx;
+}
+
+.utilization-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.utilization-trend {
+  font-size: 26rpx;
+  font-weight: bold;
+  width: 80rpx;
+  text-align: right;
+}
+
+/* 资源详情 */
+.resource-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.detail-category {
+  padding: 25rpx;
+  background-color: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.category-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.category-stats {
+  display: flex;
+  gap: 30rpx;
+  font-size: 24rpx;
+}
+
+.total {
+  color: #666;
+}
+
+.used {
+  color: #00C896;
+}
+
+.utilization {
+  color: #FF4D61;
+  font-weight: bold;
+}
+
+/* 使用趋势 */
+.usage-trend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.trend-item {
+  flex: 1;
+  min-width: 120rpx;
+  background-color: #f8f9fa;
+  padding: 25rpx;
+  border-radius: 12rpx;
+  text-align: center;
+}
+
+.month {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.avg-utilization {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #FFA500;
+}

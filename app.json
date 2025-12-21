@@ -19,8 +19,12 @@
     "pages/help/index",
     "pages/about_us/index",
     "pages/update_teacher/index",
-    "pages/update_student/index"
-    
+    "pages/update_student/index",
+    "pages/admin/dashboard",
+    "pages/admin/quality_analysis",
+    "pages/admin/student_source",
+    "pages/admin/resource_utilization"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

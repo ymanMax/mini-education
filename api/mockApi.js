@@ -91,3 +91,21 @@ export const getHelps = () => mockData.getHelps();
 
 // 发送申请
 export const submitApply = (data) => mockData.submitApply(data);
+
+// 数据看板核心数据
+export const getDashboardData = () => mockData.getDashboardData();
+
+// 教学质量分析数据
+export const getQualityAnalysis = () => mockData.getQualityAnalysis();
+
+// 生源分析数据
+export const getStudentSourceAnalysis = () => mockData.getStudentSourceAnalysis();
+
+// 资源利用率数据
+export const getResourceUtilization = () => mockData.getResourceUtilization();
+
+// 招生预测数据
+export const getEnrollmentPrediction = () => mockData.getEnrollmentPrediction();
+
+// 导出报表
+export const exportReport = (data) => mockData.exportReport(data);

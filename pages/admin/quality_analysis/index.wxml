@@ -1,0 +1,52 @@
+<!--pages/admin/quality_analysis/index.wxml-->
+<view class="quality-analysis-container">
+  <view class="page-header">
+    <text class="title">教学质量分析</text>
+    <text class="subtitle">详细教学质量数据对比</text>
+  </view>
+
+  <!-- 科目成绩对比 -->
+  <view class="section">
+    <view class="section-title">科目成绩对比</view>
+    <view class="subject-comparison">
+      <view class="subject-item" wx:for="{{subjectScores}}" wx:key="course">
+        <view class="subject-header">
+          <text class="course-name">{{item.course}}</text>
+          <text class="course-score">{{item.score}}分</text>
+        </view>
+        <view class="score-trend">
+          <text class="trend-label">较上月:</text>
+          <text class="trend-value" style="color: {{item.trend > 0 ? '#00C896' : '#FF4D61'}}">
+            {{item.trend > 0 ? '+' : ''}}{{item.trend}}%
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 教师评分排名 -->
+  <view class="section">
+    <view class="section-title">教师评分排名</view>
+    <view class="teacher-ranking">
+      <view class="teacher-item" wx:for="{{teacherRankings}}" wx:key="id">
+        <view class="rank">{{index + 1}}</view>
+        <view class="teacher-info">
+          <text class="teacher-name">{{item.name}}</text>
+          <text class="subject">{{item.subject}}</text>
+        </view>
+        <view class="teacher-score">{{item.score}}分</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 教学质量趋势 -->
+  <view class="section">
+    <view class="section-title">教学质量趋势</view>
+    <view class="trend-chart">
+      <view class="monthly-data" wx:for="{{monthlyTrend}}" wx:key="month">
+        <view class="month">{{item.month}}</view>
+        <view class="month-score">{{item.average}}分</view>
+      </view>
+    </view>
+  </view>
+</view>

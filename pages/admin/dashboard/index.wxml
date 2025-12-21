@@ -1,0 +1,79 @@
+<!--pages/admin/dashboard/index.wxml-->
+<view class="dashboard-container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="title">教育数据看板</text>
+    <text class="subtitle">实时数据统计与决策支持</text>
+  </view>
+
+  <!-- 关键指标卡片 -->
+  <view class="stats-cards">
+    <view class="stat-card" wx:for="{{keyMetrics}}" wx:key="id">
+      <view class="stat-number">{{item.value}}</view>
+      <view class="stat-label">{{item.label}}</view>
+      <view class="stat-trend" wx:if="{{item.trend}}" style="color: {{item.trend > 0 ? '#00C896' : '#FF4D61'}}">
+        {{item.trend > 0 ? '+' : ''}}{{item.trend}}% 较上月
+      </view>
+    </view>
+  </view>
+
+  <!-- 教学质量分析 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">教学质量分析</text>
+      <button class="more-btn" bindtap="viewQualityAnalysis">查看详情</button>
+    </view>
+    <view class="quality-analysis">
+      <view class="quality-item" wx:for="{{qualityData}}" wx:key="course">
+        <view class="course-name">{{item.course}}</view>
+        <view class="score-bar">
+          <view class="score-fill" style="width: {{item.score}}%"></view>
+        </view>
+        <view class="score-text">{{item.score}}分</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 生源分析 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">生源分析</text>
+      <button class="more-btn" bindtap="viewStudentSource">查看详情</button>
+    </view>
+    <view class="source-analysis">
+      <view class="source-item" wx:for="{{sourceData}}" wx:key="region">
+        <view class="region-name">{{item.region}}</view>
+        <view class="student-count">{{item.count}}人</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 资源利用率 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">资源利用率</text>
+      <button class="more-btn" bindtap="viewResourceUtilization">查看详情</button>
+    </view>
+    <view class="resource-utilization">
+      <view class="utilization-item" wx:for="{{resourceData}}" wx:key="resource">
+        <view class="resource-name">{{item.resource}}</view>
+        <view class="utilization-bar">
+          <view class="utilization-fill" style="width: {{item.utilization}}%"></view>
+        </view>
+        <view class="utilization-text">{{item.utilization}}%</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 报表导出 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">报表导出</text>
+    </view>
+    <view class="export-buttons">
+      <button class="export-btn" bindtap="exportData('excel')">导出Excel</button>
+      <button class="export-btn" bindtap="exportData('pdf')">导出PDF</button>
+      <button class="export-btn" bindtap="exportData('csv')">导出CSV</button>
+    </view>
+  </view>
+</view>
